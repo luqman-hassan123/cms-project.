@@ -10,8 +10,8 @@ const{ validateCarEmployeeHistoryId,
     validateCreateHistory,
     validateUpdateHistory } = require("../validation/carEmployeeHistoryValidation");
 
-router.post("/create", validateCreateHistory ,createHistory);
-router.get("/all", getAllHistories);
+router.post("/", validateCreateHistory ,createHistory);
+router.get("/", getAllHistories);
 router.get("/:carEmployeeHistoryId", validateCarEmployeeHistoryId, getHistoryById);
 router.put("/:carEmployeeHistoryId", validateUpdateHistory ,updateHistory);
 router.delete("/:carEmployeeHistoryId", validateCarEmployeeHistoryId, deleteHistory);
