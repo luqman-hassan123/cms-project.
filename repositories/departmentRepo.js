@@ -1,6 +1,6 @@
 /*
 Just all database queries and functions
-all daatabase function must be in repo file and also custom queries  
+all daatabase function must be in repo file and also custom queries 
 */
 const Department = require("../models/Department");
 const createDepartment = async (name, description, ministry_id) => {
