@@ -23,7 +23,10 @@ const validateCreateHistory = [
     next();
   },
 ];
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1cd02e0 (restore changes from stash)
 const validateUpdateHistory = [
   check("carId")
     .optional()
@@ -48,7 +51,10 @@ const validateUpdateHistory = [
     next();
   },
 ];
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1cd02e0 (restore changes from stash)
 const validateCarEmployeeHistoryId = [
   check("carEmployeeHistoryId")
     .notEmpty().withMessage("CarEmployeeHistory ID is required")
