@@ -8,7 +8,7 @@ const createDriver = async (driverData) => {
         logInfo('driver created successfully', {filePath: 'services/driverService',  methodName: 'createDriver', driverId: result.driverId})
         return result;
     } catch (error) {
-        logError('Error creating driver',{ilePath: 'services/driverService', methodName: 'createDriver', error });
+        logError('Error creating driver',{filePath: 'services/driverService', methodName: 'createDriver', error });
         throw error;
     }
 };
@@ -19,7 +19,7 @@ const getDrivers = async () => {
         logInfo('driver fetched successfully', {filePath: 'services/driverService', methodName: 'getDrivers'})
         return result;
     } catch (error) {
-        logError('Error getting all drivers',{ilePath: 'services/driverService', methodName: 'getDrivers', error });
+        logError('Error getting all drivers',{filePath: 'services/driverService', methodName: 'getDrivers', error });
         throw error;
     }
 };
