@@ -4,7 +4,7 @@ const createDriver = async (req, res) => {
     try {
         const driverData = req.body;
         const newDriver = await driverService.createDriver(driverData);
-        console.log(newDriver);  // Log to check the response structure
+        console.log(newDriver); 
         res.status(201).json({
             message: 'Driver created successfully',
             data: newDriver,
@@ -20,10 +20,11 @@ const getDrivers = async (req, res) => {
     try {
         const drivers = await driverService.getDrivers();
         res.status(200).json({
-            message: 'Drivers retrieved successfullyyyy',
+            message: 'Drivers retrieved successfully',
             data: drivers,
         });
     } catch (error) {
+        console.log('Error:', error);  // Log the error for debugging
         res.status(500).json({
             message: 'Error in retrieving drivers',
             error: error.message,
@@ -32,8 +33,8 @@ const getDrivers = async (req, res) => {
 };
 const getDriverById = async (req, res) => {
     try {
-        const { id } = req.params;
-        const driver = await driverService.getDriverById(id);
+        const { driverId } = req.params;
+        const driver = await driverService.getDriverById(driverId);
         if (driver) {
             res.status(200).json({
                 message: 'Driver retrieved successfully',
@@ -53,9 +54,9 @@ const getDriverById = async (req, res) => {
 };
 const updateDriver = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { driverId } = req.params;
         const driverData = req.body;
-        const updatedDriver = await driverService.updateDriver(id, driverData);
+        const updatedDriver = await driverService.updateDriver(driverId, driverData);
         if (updatedDriver) {
             res.status(200).json({
                 message: 'Driver updated successfully',
@@ -75,8 +76,8 @@ const updateDriver = async (req, res) => {
 };
 const deleteDriver = async (req, res) => {
     try {
-        const { id } = req.params;
-        const result = await driverService.deleteDriver(id);
+        const { driverId } = req.params;
+        const result = await driverService.deleteDriver(driverId);
         if (result) {
             res.status(200).json({
                 message: 'Driver deleted successfully',

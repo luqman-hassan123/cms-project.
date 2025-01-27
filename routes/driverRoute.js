@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.post('/', validateCreateDriver  ,createDriver);
 router.get('/', getDrivers);
-router.get('/drivers/:id', validateDriverId ,getDriverById);
-router.put('/drivers/:id', validateUpdateDriver ,updateDriver);
-router.delete('/drivers/:id', validateDriverId , deleteDriver);
+router.get('/:driverId', validateDriverId ,getDriverById);
+router.put('/:driverId', validateUpdateDriver ,updateDriver);
+router.delete('/:driverId', validateDriverId , deleteDriver);
 
 module.exports = router;

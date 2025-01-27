@@ -1,38 +1,59 @@
+const { logInfo, logError } = require('../config/logger');
 const driverRepo = require('../repositories/driverRepo'); 
 
 const createDriver = async (driverData) => {
     try {
-        return await driverRepo.createDriver(driverData);
+        logInfo('creating new driver ', {filePath: 'services/driverService', methodName: 'createDriver', driverData})
+        const result = await driverRepo.createDriver(driverData);
+        logInfo('driver created successfully', {filePath: 'services/driverService',  methodName: 'createDriver', driverId: result.driverId})
+        return result;
     } catch (error) {
-        throw new Error('Error in driver creation service: ' + error.message);
+        logError('Error creating driver',{ilePath: 'services/driverService', methodName: 'createDriver', error });
+        throw error;
     }
 };
 const getDrivers = async () => {
     try {
-        return await driverRepo.getDrivers();
+        logInfo('getting all drivers', {filePath: 'services/driverService', methodName: 'getDrivers'});
+        const result = await driverRepo.getDrivers();
+        logInfo('driver fetched successfully', {filePath: 'services/driverService', methodName: 'getDrivers'})
+        return result;
     } catch (error) {
-        throw new Error('Error in retrieving drivers service: ' + error.message);
+        logError('Error getting all drivers',{ilePath: 'services/driverService', methodName: 'getDrivers', error });
+        throw error;
     }
 };
 const getDriverById = async (driverId) => {
     try {
-        return await driverRepo.getDriverById(driverId);
+        logInfo('Get driver by ID', {filePath: 'services/driverService', methodName: 'getDriverById', driverId});
+        const driver = await driverRepo.getDriverById(driverId);
+        logInfo('driver fetched successfully', {filePath: 'services/driverService', methodName: 'getDriverById', driver});
+        return driver;
     } catch (error) {
-        throw new Error('Error in retrieving driver by ID service: ' + error.message);
+        logError('Error getting driver by ID', {filePath: 'services/driverService', methodName:'getDriverById', error});
+        throw error;
     }
 };
 const updateDriver = async (driverId, driverData) => {
     try {
-        return await driverRepo.updateDriver(driverId, driverData); 
+        logInfo('updating driver', {filePath: 'services/driverService', methodName: 'updateDriver', driverId, driverData} )
+        const result = await driverRepo.updateDriver(driverId, driverData);
+        logInfo('driver updated successfully', {filePath: 'services/driverService', methodName: 'updateDriver', driverId});
+        return result;
     } catch (error) {
-        throw new Error('Error in updating driver service: ' + error.message);
+        logError('Error updating driver' ,{filePath: 'services/driverService', methodName: 'updateDriver', error})
+        throw error;
     }
 };
 const deleteDriver = async (driverId) => {
     try {
-        return await driverRepo.deleteDriver(driverId);
+        logInfo('deleting driver', {filePath: 'services/driverService', methodName: 'deleteDriver', driverId});
+        const result = await driverRepo.deleteDriver(driverId);
+        logInfo('driver deleted successfully', {filePath: 'services/driverService', methodName: 'deleteDriver', driverId});
+        return result;
     } catch (error) {
-        throw new Error('Error in deleting driver service: ' + error.message);
+        logError('Error deleting driver',{filePath: 'services/driverService', methodName: 'deleteDriver', error});
+        throw error;
     }
 };
 
