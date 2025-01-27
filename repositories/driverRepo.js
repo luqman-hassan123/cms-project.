@@ -13,7 +13,8 @@ const createDriver = async (driverData) => {
 const getDrivers = async () => {
     try {
         const drivers = await Driver.findAll();
-        console.log("Drivers retrieved:", drivers); 
+        console.log("Drivers retrieved:", drivers);
+        return drivers;
     } catch (error) {
         throw new Error('Error retrieving drivers from repository: ' + error.message);
     }
