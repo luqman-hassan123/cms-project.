@@ -32,10 +32,10 @@ const validateUpdateHistory = [
     .isInt().withMessage("Employee ID must be an integer"),
   check("startDate")
     .optional()
-    .isDate().withMessage("Start Date must be a valid date"),
+    .isISO8601().withMessage("Start Date must be a valid date in ISO 8601 format"),
   check("endDate")
     .optional()
-    .isDate().withMessage("End Date must be a valid date, if provided"),
+    .isISO8601().withMessage("End Date must be a valid date in ISO 8601 format, if provided"),
   check("description")
     .optional()
     .isLength({ max: 200 }).withMessage("Description must be less than 200 characters"),

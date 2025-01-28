@@ -39,10 +39,10 @@ const CarEmployeeHistory = sequelize.define(
   }
 );
 
-// CarEmployeeHistory.belongsTo(Car, { foreignKey: "carId", onDelete: "CASCADE" });
+// CarEmployeeHistory.belongsTo(Car, { foreignKey: "carId" });
 // Car.hasMany(CarEmployeeHistory, { foreignKey: "carId" });
 
-// CarEmployeeHistory.belongsTo(Employee, { foreignKey: "emp_id", onDelete: "CASCADE" });
+// CarEmployeeHistory.belongsTo(Employee, { foreignKey: "emp_id" });
 // Employee.hasMany(CarEmployeeHistory, { foreignKey: "emp_id" });
 
 module.exports = CarEmployeeHistory;
