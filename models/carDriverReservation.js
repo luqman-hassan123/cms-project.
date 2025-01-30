@@ -31,13 +31,16 @@ const CarDriverReservation = sequelize.define(
   }
 );
 
-// CarDriverReservation.belongsTo(Car, { foreignKey: "carId", onDelete: "CASCADE" });
-// CarDriverReservation.belongsTo(Driver, { foreignKey: "driverId", onDelete: "CASCADE" });
-
-// Car.hasOne(CarDriverReservation, { foreignKey: "carId" });
-// Driver.hasOne(CarDriverReservation, { foreignKey: "driverId" });
+//CarDriverReservation.belongsTo(Car, { foreignKey: "carId", onDelete: "CASCADE" });
+//CarDriverReservation.belongsTo(Driver, { foreignKey: "driverId", onDelete: "CASCADE" });
 
 (async () => {
-  await sequelize.sync({ alter: true });})
+  try {
+    await sequelize.sync({ alter: true }); 
+    console.log('Database synced successfully');
+  } catch (error) {
+    console.error('Error syncing database:', error);
+  }
+})();
 
 module.exports = CarDriverReservation;
