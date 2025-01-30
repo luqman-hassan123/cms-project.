@@ -1,4 +1,4 @@
-const CarDriverReservationRepository = require("../repositories/CarDriverReservationRepository");
+const CarDriverReservationRepository = require("../repositories/carDriverReservationRepository");
 
 const createCarDriverReservation = async (req, res) => {
   try {
