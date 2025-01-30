@@ -4,15 +4,9 @@ const createCarHandler = async (req, res) => {
     const carData = req.body; 
     try {
         const car = await carService.createCar(carData); 
-        res.status(201).json({
-            message: 'Car created successfully',
-            data: car, 
-        });
+        res.status(201).json(car);
     } catch (error) {
-        res.status(500).json({ 
-            message: 'Error in car creation', 
-            error: error.message, 
-        });
+        res.status(500).json({ message: 'Error in car creation: ' + error.message });
     }
 };
 const getCarsHandler = async (req, res) => {
