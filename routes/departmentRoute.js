@@ -15,7 +15,7 @@ const {
 
 router.post('/', validateCreateDepartment, createDepartment);
 router.delete('/:dep_id', validateDepartmentId ,deleteDepartment);
-router.put('/:dep_id', validateUpdateDepartment ,updateDepartment);
+router.put('/:dep_id', validateDepartmentId ,validateUpdateDepartment ,updateDepartment);
 router.get('/:dep_id', validateDepartmentId ,getDepartmentById);
 router.get('/' ,getDepartments);
 
