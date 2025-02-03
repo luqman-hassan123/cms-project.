@@ -29,11 +29,6 @@ const EmpCarAllocation = sequelize.define(
   }
 );
 
-// EmpCarAllocation.associate = (models) => {
-//   EmpCarAllocation.belongsTo(models.Employee, { foreignKey: "employeeId" });
-//   EmpCarAllocation.belongsTo(models.Car, { foreignKey: "carId" });
-// };
-
 (async () => {
   await sequelize.sync({ alter: true });
 })();

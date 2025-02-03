@@ -35,8 +35,6 @@ const Employee = sequelize.define(
   }
 );
 
-//Department.hasMany(Employee, { foreignKey: "dep_id" });
-
 (async () => {
   await sequelize.sync({ alter: true }); 
 })();

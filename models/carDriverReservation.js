@@ -31,9 +31,6 @@ const CarDriverReservation = sequelize.define(
   }
 );
 
-//CarDriverReservation.belongsTo(Car, { foreignKey: "carId", onDelete: "CASCADE" });
-//CarDriverReservation.belongsTo(Driver, { foreignKey: "driverId", onDelete: "CASCADE" });
-
 (async () => {
   try {
     await sequelize.sync({ alter: true }); 

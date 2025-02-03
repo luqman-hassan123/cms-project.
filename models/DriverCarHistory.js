@@ -1,26 +1,33 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/dbConfig");
-const Ministry = require("./Ministry");
 
-const Department = sequelize.define(
-  "Department",
+const DriverCarHistory = sequelize.define(
+  "DriverCarHistory",
   {
-    dep_id: {
+    driverCarHistoryId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    ministry_id: {
+    driverId: {
       type: DataTypes.INTEGER,
-      allowNull: false, 
-    },
-    name: {
-      type: DataTypes.STRING,
       allowNull: false,
+    },
+    carId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    startDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    endDate: {
+      type: DataTypes.DATE,
+      allowNull: true,
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
   },
   {
@@ -31,7 +38,7 @@ const Department = sequelize.define(
 );
 
 (async () => {
-    await sequelize.sync({ alter: true }); 
+  await sequelize.sync({ alter: true });
 })();
 
-module.exports = Department;
+module.exports = DriverCarHistory;
