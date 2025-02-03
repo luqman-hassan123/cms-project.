@@ -39,10 +39,8 @@ const CarEmployeeHistory = sequelize.define(
   }
 );
 
-// CarEmployeeHistory.belongsTo(Car, { foreignKey: "carId" });
-// Car.hasMany(CarEmployeeHistory, { foreignKey: "carId" });
-
-// CarEmployeeHistory.belongsTo(Employee, { foreignKey: "emp_id" });
-// Employee.hasMany(CarEmployeeHistory, { foreignKey: "emp_id" });
+(async () => {
+  await sequelize.sync({ alter: true });
+})();
 
 module.exports = CarEmployeeHistory;

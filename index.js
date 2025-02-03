@@ -10,6 +10,7 @@ const empCarAllocationRoutes = require ('./routes/empCarAllocationRoutes')
 const CarDriverReservationRoute = require('./routes/carDriverReservationRoute');
 const carEmployeeHistoryRoute = require('./routes/carEmployeeHistoryRoute')
 const dbConfig = require("./config/dbConfig");
+const driverCarHistoryRoute = require("./routes/driverCarHistoryRoute");
 
 dotenv.config();
 //Routes-> Controller -> Services -> Buissness Logic + Repositoies
@@ -23,6 +24,8 @@ app.use(basePath + '/driver' ,driverRoute)
 app.use(basePath+ '/empCarAllocation', empCarAllocationRoutes)
 app.use(basePath + '/carDriverReservation', CarDriverReservationRoute)
 app.use(basePath + '/carEmployeeHistory', carEmployeeHistoryRoute)
+app.use(basePath + '/drivercarhistory', driverCarHistoryRoute);
+
 dbConfig.authenticate();
 
 const PORT = process.env.PORT || 3000;
