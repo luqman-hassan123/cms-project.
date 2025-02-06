@@ -13,6 +13,7 @@ const dbConfig = require("./config/dbConfig");
 const driverCarHistoryRoute = require("./routes/driverCarHistoryRoute");
 const userRoute = require ('./routes/userRoute')
 const fuelRoute = require ('./routes/fuelRoute')
+const budgetRoute = require ('./routes/budgetRoute')
 
 dotenv.config();
 //Routes-> Controller -> Services -> Buissness Logic + Repositoies
@@ -29,6 +30,7 @@ app.use(basePath + '/carEmployeeHistory', carEmployeeHistoryRoute)
 app.use(basePath + '/drivercarhistory', driverCarHistoryRoute);
 app.use(basePath + '/user', userRoute)
 app.use(basePath + '/fuel', fuelRoute)
+app.use(basePath + '/budget' , budgetRoute)
 
 dbConfig.authenticate();
 
