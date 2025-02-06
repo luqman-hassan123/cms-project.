@@ -5,8 +5,9 @@ const Car = require("./Car");
 const Driver = require("./Driver");
 const CarDriverReservation = require("./carDriverReservation");
 const CarEmployeeHistory = require("./carEmployeeHistory");
-const EmpCarAllocation = require("./EmpCarAllocation");
+const employeeCarAllocation = require("./employeeCarAllocation");
 const DriverCarHistory = require("./DriverCarHistory");
+const Budget = require ('./Budget')
 
 // Ministry has many Departments
 Ministry.hasMany(Department, { foreignKey: "ministry_id", onDelete: "CASCADE" });
@@ -25,15 +26,18 @@ Employee.hasMany(CarEmployeeHistory, { foreignKey: "emp_id", onDelete: "CASCADE"
 CarEmployeeHistory.belongsTo(Car, { foreignKey: "carId" });
 CarEmployeeHistory.belongsTo(Employee, { foreignKey: "emp_id" });
 // Employee-Car Allocation Relationship
-Employee.hasMany(EmpCarAllocation, { foreignKey: "emp_id", onDelete: "CASCADE" });
-Car.hasMany(EmpCarAllocation, { foreignKey: "carId", onDelete: "CASCADE" });
-EmpCarAllocation.belongsTo(Employee, { foreignKey: "emp_id" });
-EmpCarAllocation.belongsTo(Car, { foreignKey: "carId" });
+Employee.hasMany(employeeCarAllocation, { foreignKey: "emp_id", onDelete: "CASCADE" });
+Car.hasMany(employeeCarAllocation, { foreignKey: "carId", onDelete: "CASCADE" });
+employeeCarAllocation.belongsTo(Employee, { foreignKey: "emp_id" });
+employeeCarAllocation.belongsTo(Car, { foreignKey: "carId" });
 // Driver-Car History Relationship
 Driver.hasMany(DriverCarHistory, { foreignKey: "driverId", onDelete: "CASCADE" });
 Car.hasMany(DriverCarHistory, { foreignKey: "carId", onDelete: "CASCADE" });
 DriverCarHistory.belongsTo(Driver, { foreignKey: "driverId" });
 DriverCarHistory.belongsTo(Car, { foreignKey: "carId" });
+//department and budget
+Department.hasMany(Budget, { foreignKey: "dep_id" }); 
+Budget.belongsTo(Department, { foreignKey: "dep_id" }); 
 
 module.exports = {
   Ministry,
@@ -43,6 +47,7 @@ module.exports = {
   Driver,
   CarDriverReservation,
   CarEmployeeHistory,
-  EmpCarAllocation,
+  employeeCarAllocation,
   DriverCarHistory,
+  Budget,
 };
