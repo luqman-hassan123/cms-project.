@@ -4,12 +4,12 @@ const sequelize = require("../config/dbConfig");
 const EmpCarAllocation = sequelize.define(
   "EmpCarAllocation",
   {
-    empCarAlloId: {
+    empCarAllocationId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    emp_id: {
+    employeeId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -30,7 +30,12 @@ const EmpCarAllocation = sequelize.define(
 );
 
 (async () => {
-  await sequelize.sync({ alter: true });
+  try {
+    await sequelize.sync({ alter: true }); 
+    console.log('Database synced successfully');
+  } catch (error) {
+    console.error('Error syncing database:', error);
+  }
 })();
 
 module.exports = EmpCarAllocation;

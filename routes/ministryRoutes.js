@@ -32,9 +32,9 @@ const {
 } = require('../validation/ministryValidation');
 
 router.post('/', validateCreateMinistry, createMinistry);
-router.delete('/:ministry_id', validateMinistryId, deleteMinistry);
-router.put('/:ministry_id', validateMinistryId, validateUpdateMinistry, updateMinistry);
-router.get('/:ministry_id', validateMinistryId, getMinistryById);
+router.delete('/:ministryId', validateMinistryId, deleteMinistry);
+router.put('/:ministryId', validateMinistryId, validateUpdateMinistry, updateMinistry);
+router.get('/:ministryId', validateMinistryId, getMinistryById);
 router.get('/', getMinistries);
 
 module.exports = router;

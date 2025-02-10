@@ -15,7 +15,7 @@ const CarEmployeeHistory = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    emp_id: {
+    employeeId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -40,7 +40,12 @@ const CarEmployeeHistory = sequelize.define(
 );
 
 (async () => {
-  await sequelize.sync({ alter: true });
+  try {
+    await sequelize.sync({ alter: true }); 
+    console.log("car employee history table synchronized successfully.");
+  } catch (error) {
+    console.error("Error during car employee history  synchronization:", error);
+  }
 })();
 
 module.exports = CarEmployeeHistory;

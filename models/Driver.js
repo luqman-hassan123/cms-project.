@@ -9,6 +9,10 @@ const Driver = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
+    departmentId:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     driverName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -36,7 +40,12 @@ const Driver = sequelize.define(
 );
 
 (async () => {
-  await sequelize.sync({ alter: true }); 
+  try {
+    await sequelize.sync({ alter: true }); 
+    console.log('Driver Database synced successfully');
+  } catch (error) {
+    console.error('Error syncing Driver table database:', error);
+  }
 })();
 
 module.exports = Driver;

@@ -14,9 +14,9 @@ const {
 } = require('../validation/empCarAllocationValidation');
 
 router.post('/', validateCreateEmpCarAllocation, createEmpCarAllocation);
-router.delete('/:empCarAlloId', validateEmpCarAllocationId, deleteEmpCarAllocation);
-router.put('/:empCarAlloId', validateUpdateEmpCarAllocation, updateEmpCarAllocation);
-router.get('/:empCarAlloId', validateEmpCarAllocationId, getEmpCarAllocationById);
+router.delete('/:empCarAllocationId', validateEmpCarAllocationId, deleteEmpCarAllocation);
+router.put('/:empCarAllocationId', validateUpdateEmpCarAllocation, updateEmpCarAllocation);
+router.get('/:empCarAllocationId', validateEmpCarAllocationId, getEmpCarAllocationById);
 router.get('/', getEmpCarAllocations);
 
 module.exports = router;

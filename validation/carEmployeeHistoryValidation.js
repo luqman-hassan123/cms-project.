@@ -4,7 +4,7 @@ const validateCreateHistory = [
   check("carId")
     .notEmpty().withMessage("Car ID is required")
     .isInt().withMessage("Car ID must be an integer"),
-  check("emp_id")
+  check("employeeId")
     .notEmpty().withMessage("Employee ID is required")
     .isInt().withMessage("Employee ID must be an integer"),
   check("startDate")
@@ -27,7 +27,7 @@ const validateUpdateHistory = [
   check("carId")
     .optional()
     .isInt().withMessage("Car ID must be an integer"),
-  check("emp_id")
+  check("employeeId")
     .optional()
     .isInt().withMessage("Employee ID must be an integer"),
   check("startDate")

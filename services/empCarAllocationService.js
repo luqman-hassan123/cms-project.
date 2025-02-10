@@ -23,15 +23,15 @@ const getEmpCarAllocations = async () => {
         throw new Error('Service Error - Retrieving empCarAllocations: ' + error.message);
     }
 };
-const getEmpCarAllocationById = async (empCarAlloId) => {
+const getEmpCarAllocationById = async (empCarAllocationId) => {
     try {
-        logInfo('Retrieving employee car allocation by ID', {filePath: 'repositories/empCarAllocationService',methodName: 'getEmpCarAllocationById',empCarAlloId});
-        const empCarAllocation = await empCarAllocationRepo.getEmpCarAllocationById(empCarAlloId);
+        logInfo('Retrieving employee car allocation by ID', {filePath: 'repositories/empCarAllocationService',methodName: 'getEmpCarAllocationById',empCarAllocationId});
+        const empCarAllocation = await empCarAllocationRepo.getEmpCarAllocationById(empCarAllocationId);
         if (!empCarAllocation) {
             logError('Employee car allocation not found', {
                 filePath: 'repositories/empCarAllocationService',
                 methodName: 'getEmpCarAllocationById',
-                empCarAlloId,
+                empCarAllocationId,
             });
             throw new Error('EmpCarAllocation not found');
         }
@@ -44,25 +44,25 @@ const getEmpCarAllocationById = async (empCarAlloId) => {
         logError('Error retrieving employee car allocation by ID', {
             filePath: 'repositories/empCarAllocationService',
             methodName: 'getEmpCarAllocationById',
-            empCarAlloId,
+            empCarAllocationId,
             error,
         });
         throw new Error('Service Error - Retrieving empCarAllocation by ID: ' + error.message);
     }
 };
-const updateEmpCarAllocation = async (empCarAlloId, empCarAllocationData) => {
+const updateEmpCarAllocation = async (empCarAllocationId, empCarAllocationData) => {
     try {
         logInfo('Updating employee car allocation', {
             filePath: 'repositories/empCarAllocationService',
             methodName: 'updateEmpCarAllocation',
-            empCarAlloId,
+            empCarAllocationId,
         });
-        const updatedEmpCarAllocation = await empCarAllocationRepo.updateEmpCarAllocation(empCarAlloId, empCarAllocationData);
+        const updatedEmpCarAllocation = await empCarAllocationRepo.updateEmpCarAllocation(empCarAllocationId, empCarAllocationData);
         if (!updatedEmpCarAllocation) {
             logError('Employee car allocation not found for update', {
                 filePath: 'repositories/empCarAllocationService',
                 methodName: 'updateEmpCarAllocation',
-                empCarAlloId,
+                empCarAllocationId,
             });
             throw new Error('EmpCarAllocation not found');
         }
@@ -75,16 +75,16 @@ const updateEmpCarAllocation = async (empCarAlloId, empCarAllocationData) => {
         logError('Error updating employee car allocation', {
             filePath: 'repositories/empCarAllocationService',
             methodName: 'updateEmpCarAllocation',
-            empCarAlloId,
+            empCarAllocationId,
             error,
         });
         throw new Error('Service Error - Updating empCarAllocation: ' + error.message);
     }
 };
-const deleteEmpCarAllocation = async (empCarAlloId) => {
+const deleteEmpCarAllocation = async (empCarAllocationId) => {
     try {
-        logInfo('deleting employee car allocation ', {filePath: 'services/empCarAllocationService', methodName: 'deleteEmpCarAllocation', empCarAlloId })
-        const deleted = await empCarAllocationRepo.deleteEmpCarAllocation(empCarAlloId);
+        logInfo('deleting employee car allocation ', {filePath: 'services/empCarAllocationService', methodName: 'deleteEmpCarAllocation', empCarAllocationId })
+        const deleted = await empCarAllocationRepo.deleteEmpCarAllocation(empCarAllocationId);
         if (!deleted) {
             throw new Error('EmpCarAllocation not found');
         }
@@ -97,7 +97,7 @@ const deleteEmpCarAllocation = async (empCarAlloId) => {
         logError('Error deleting employee car allocation', {
             filePath: 'repositories/empCarAllocationService',
             methodName: 'deleteEmpCarAllocation',
-            empCarAlloId,
+            empCarAllocationId,
             error,
         });
         throw new Error('Service Error - Deleting empCarAllocation: ' + error.message);

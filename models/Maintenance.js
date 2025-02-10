@@ -28,4 +28,13 @@ const Maintenance = sequelize.define(
     },
 );
 
+(async () => {
+    try {
+      await sequelize.sync({ alter: true });
+      console.log("maintenance table synchronized successfully.");
+    } catch (error) {
+      console.error("Error during maintenance synchronization:", error);
+    }
+  })();
+
 module.exports = Maintenance;

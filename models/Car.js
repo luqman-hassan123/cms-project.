@@ -9,6 +9,10 @@ const Car = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
+    departmentId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     carModel: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -43,11 +47,12 @@ const Car = sequelize.define(
 
 (async () => {
   try {
-    await sequelize.sync({ alter: true });
+    await sequelize.sync({ alter: true }); 
     console.log("Car table synchronized successfully.");
   } catch (error) {
     console.error("Error during car synchronization:", error);
   }
 })();
+
 
 module.exports = Car;

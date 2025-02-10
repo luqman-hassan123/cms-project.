@@ -9,7 +9,7 @@ const Budget = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    dep_id: {
+    departmentId: {
       type: DataTypes.INTEGER,
       allowNull: false, 
     },

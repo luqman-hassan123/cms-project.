@@ -31,9 +31,9 @@ const User = sequelize.define(
 (async () => {
     try {
       await sequelize.sync({ alter: true });
-      console.log("Car table synchronized successfully.");
+      console.log("user table synchronized successfully.");
     } catch (error) {
-      console.error("Error during car synchronization:", error);
+      console.error("Error during user synchronization:", error);
     }
   })();
 

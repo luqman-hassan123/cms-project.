@@ -29,12 +29,12 @@ const getMinistriesService = async () => {
         throw error;
     }
 };
-const getMinistryByIdService = async (ministry_id) => {
+const getMinistryByIdService = async (ministryId) => {
     try {
-        logInfo('Fetching ministry by ID service', { filePath: 'services/ministryService.js', methodName: 'getMinistryByIdService', ministry_id });
-        const ministry = await ministryRepo.getMinistryById(ministry_id);
+        logInfo('Fetching ministry by ID service', { filePath: 'services/ministryService.js', methodName: 'getMinistryByIdService', ministryId });
+        const ministry = await ministryRepo.getMinistryById(ministryId);
         if (!ministry) {
-            logInfo('Ministry not found', { filePath: 'services/ministryService.js', methodName: 'getMinistryByIdService', ministry_id });
+            logInfo('Ministry not found', { filePath: 'services/ministryService.js', methodName: 'getMinistryByIdService', ministryId });
         }
         return ministry;
     } catch (error) {
@@ -42,22 +42,22 @@ const getMinistryByIdService = async (ministry_id) => {
         throw error;
     }
 };
-const updateMinistryService = async (ministry_id, name, address, description) => {
+const updateMinistryService = async (ministryId, name, address, description) => {
   try {
-    logInfo('Updating ministry', { filePath: 'services/ministryService.js', methodName: 'updateMinistryService', ministry_id, name });
-    const updatedMinistry = await ministryRepo.updateMinistry(ministry_id, name, address, description);
-    logInfo('Ministry updated successfully', { filePath: 'services/ministryService.js', methodName: 'updateMinistryService', ministry_id });
+    logInfo('Updating ministry', { filePath: 'services/ministryService.js', methodName: 'updateMinistryService', ministryId, name });
+    const updatedMinistry = await ministryRepo.updateMinistry(ministryId, name, address, description);
+    logInfo('Ministry updated successfully', { filePath: 'services/ministryService.js', methodName: 'updateMinistryService', ministryId });
     return updatedMinistry;
 } catch (error) {
     logError('Error updating ministry', { filePath: 'services/ministryService.js', methodName: 'updateMinistryService', error });
     throw error;
 }
 };
-const deleteMinistryService = async (ministry_id) => {
+const deleteMinistryService = async (ministryId) => {
     try {
-        logInfo('Deleting ministry', { filePath: 'services/ministryService.js', methodName: 'deleteMinistryService', ministry_id });
-        const deleted = await ministryRepo.deleteMinistry(ministry_id);
-        logInfo('Ministry deleted successfully', { filePath: 'services/ministryService.js', methodName: 'deleteMinistryService', ministry_id });
+        logInfo('Deleting ministry', { filePath: 'services/ministryService.js', methodName: 'deleteMinistryService', ministryId });
+        const deleted = await ministryRepo.deleteMinistry(ministryId);
+        logInfo('Ministry deleted successfully', { filePath: 'services/ministryService.js', methodName: 'deleteMinistryService', ministryId });
         return deleted;
     } catch (error) {
         logError('Error deleting ministry', { filePath: 'services/ministryService.js', methodName: 'deleteMinistryService', error });
