@@ -1,16 +1,15 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/dbConfig");
-const Ministry = require("./Ministry");
 
 const Department = sequelize.define(
   "Department",
   {
-    dep_id: {
+    departmentId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    ministry_id: {
+    ministryId: {
       type: DataTypes.INTEGER,
       allowNull: false, 
     },
@@ -31,7 +30,12 @@ const Department = sequelize.define(
 );
 
 (async () => {
+  try {
     await sequelize.sync({ alter: true }); 
+    console.log("department table synchronized successfully.");
+  } catch (error) {
+    console.error("Error during department synchronization:", error);
+  }
 })();
 
 module.exports = Department;

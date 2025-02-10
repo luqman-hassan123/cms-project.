@@ -4,40 +4,43 @@ const Employee = require("./Employee");
 const Car = require("./Car");
 const Driver = require("./Driver");
 const CarDriverReservation = require("./carDriverReservation");
-const CarEmployeeHistory = require("./carEmployeeHistory");
-const employeeCarAllocation = require("./employeeCarAllocation");
+const carEmployeeHistory = require("./carEmployeeHistory");
+const employeeCarAllocation = require("./employeeCarAllocation"); 
 const DriverCarHistory = require("./DriverCarHistory");
-const Budget = require ('./Budget')
+const Budget = require("./Budget");
 
 // Ministry has many Departments
-Ministry.hasMany(Department, { foreignKey: "ministry_id", onDelete: "CASCADE" });
-Department.belongsTo(Ministry, { foreignKey: "ministry_id" });
+Ministry.hasMany(Department, { foreignKey: "ministryId", onDelete: "CASCADE", as: "departments" });
+Department.belongsTo(Ministry, { foreignKey: "ministryId", as: "ministry" });
 // Department has many Employees
-Department.hasMany(Employee, { foreignKey: "dep_id", onDelete: "CASCADE" });
-Employee.belongsTo(Department, { foreignKey: "dep_id" });
+Department.hasMany(Employee, { foreignKey: "departmentId", onDelete: "CASCADE" });
+Employee.belongsTo(Department, { foreignKey: "departmentId", as: "department" });
+//car driver
+Car.belongsTo(Department, { foreignKey: "departmentId", as: "department" });
+
 // Car-Driver Reservation Relationship
 Car.hasMany(CarDriverReservation, { foreignKey: "carId", onDelete: "CASCADE" });
 Driver.hasMany(CarDriverReservation, { foreignKey: "driverId", onDelete: "CASCADE" });
 CarDriverReservation.belongsTo(Car, { foreignKey: "carId" });
 CarDriverReservation.belongsTo(Driver, { foreignKey: "driverId" });
-// Car-Employee History Relationship
-Car.hasMany(CarEmployeeHistory, { foreignKey: "carId", onDelete: "CASCADE" });
-Employee.hasMany(CarEmployeeHistory, { foreignKey: "emp_id", onDelete: "CASCADE" });
-CarEmployeeHistory.belongsTo(Car, { foreignKey: "carId" });
-CarEmployeeHistory.belongsTo(Employee, { foreignKey: "emp_id" });
-// Employee-Car Allocation Relationship
-Employee.hasMany(employeeCarAllocation, { foreignKey: "emp_id", onDelete: "CASCADE" });
+// Car-Employee History Relationship (Fixed foreign key)
+Car.hasMany(carEmployeeHistory, { foreignKey: "carId", onDelete: "CASCADE" });
+Employee.hasMany(carEmployeeHistory, { foreignKey: "employeeId", onDelete: "CASCADE" }); 
+carEmployeeHistory.belongsTo(Car, { foreignKey: "carId" });
+carEmployeeHistory.belongsTo(Employee, { foreignKey: "employeeId" });
+// Employee-Car Allocation Relationship (Fixed foreign key and capitalization)
+Employee.hasMany(employeeCarAllocation, { foreignKey: "employeeId", onDelete: "CASCADE" });
 Car.hasMany(employeeCarAllocation, { foreignKey: "carId", onDelete: "CASCADE" });
-employeeCarAllocation.belongsTo(Employee, { foreignKey: "emp_id" });
+employeeCarAllocation.belongsTo(Employee, { foreignKey: "employeeId" }); 
 employeeCarAllocation.belongsTo(Car, { foreignKey: "carId" });
 // Driver-Car History Relationship
 Driver.hasMany(DriverCarHistory, { foreignKey: "driverId", onDelete: "CASCADE" });
 Car.hasMany(DriverCarHistory, { foreignKey: "carId", onDelete: "CASCADE" });
 DriverCarHistory.belongsTo(Driver, { foreignKey: "driverId" });
 DriverCarHistory.belongsTo(Car, { foreignKey: "carId" });
-//department and budget
-Department.hasMany(Budget, { foreignKey: "dep_id" }); 
-Budget.belongsTo(Department, { foreignKey: "dep_id" }); 
+// Department and Budget Relationship
+Department.hasMany(Budget, { foreignKey: "departmentId" });
+Budget.belongsTo(Department, { foreignKey: "departmentId" });
 
 module.exports = {
   Ministry,
@@ -46,8 +49,8 @@ module.exports = {
   Car,
   Driver,
   CarDriverReservation,
-  CarEmployeeHistory,
-  employeeCarAllocation,
+  carEmployeeHistory,
+  employeeCarAllocation, 
   DriverCarHistory,
   Budget,
 };

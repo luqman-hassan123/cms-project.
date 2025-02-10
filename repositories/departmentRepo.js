@@ -2,14 +2,16 @@
 Just all database queries and functions
 all daatabase function must be in repo file and also custom queries 
 */
-const Department = require("../models/Department");
+const { Ministry, Department } = require("../models/Relationships");
 const { logInfo, logError } = require ('../config/logger')
+const Relationship =  require ('../models/Relationships')
 
-const createDepartment = async (name, description, ministry_id) => {
+const createDepartment = async (name, description, ministryId) => {
   try {
-    logInfo("Creating a new department", { filePath: "repo.js", methodName: "createDepartment", name, description, ministry_id });
-    const department = await Department.create({ name, description, ministry_id });
+    logInfo("Creating a new department", { filePath: "repo.js", methodName: "createDepartment", name, description, ministryId });
+    const department = await Department.create({ name, description, ministryId });
     logInfo("Department created successfully", { filePath: "repo.js", methodName: "createDepartment", department });
+    
     return department;
   } catch (error) {
     logError("Error creating department", { filePath: "repo.js", methodName: "createDepartment", error: error.message });
@@ -19,7 +21,15 @@ const createDepartment = async (name, description, ministry_id) => {
 const getAllDepartment = async () => {
   try {
     logInfo("Fetching all departments", { filePath: "repo.js", methodName: "getAllDepartment" });
-    const departments = await Department.findAll();
+    const departments = await Department.findAll({
+      include: [
+      {
+        model: Ministry, 
+        as: "ministry",   
+        attributes: ["ministryId", "name", "address", "description", "created_at", "updated_at"],
+      },
+    ],
+    });
     logInfo("Fetched all departments successfully", { filePath: "repo.js", methodName: "getAllDepartment", count: departments.length });
     return departments;
   } catch (error) {
@@ -27,10 +37,16 @@ const getAllDepartment = async () => {
     throw new Error("Error getting all departments: " + error.message);
   }
 };
-const getDepartmentById = async (dept_id) => {
+const getDepartmentById = async (departmentId) => {
   try {
-    logInfo("Fetching department by ID", { filePath: "repo.js", methodName: "getDepartmentById", dept_id });
-    const department = await Department.findByPk(dept_id);
+    logInfo("Fetching department by ID", { filePath: "repo.js", methodName: "getDepartmentById", departmentId });
+    const department = await Department.findByPk(departmentId, {include: [
+        {
+          model: Ministry,
+          as: "ministry",
+          attributes: ["ministryId", "name", "address", "description", "created_at", "updated_at"],
+        },
+      ],});
     logInfo("Fetched department successfully", { filePath: "repo.js", methodName: "getDepartmentById", department });
     return department;
   } catch (error) {
@@ -38,14 +54,14 @@ const getDepartmentById = async (dept_id) => {
     throw new Error("Error getting department by id: " + error.message);
   }
 };
-const updateDepartment = async (dep_id, { name, description, ministry_id }) => {
+const updateDepartment = async (departmentId, { name, description, ministryId }) => {
   try {
-    logInfo("Updating department", { filePath: "repo.js", methodName: "updateDepartment", dep_id, name, description, ministry_id });
-    const department = await Department.findByPk(dep_id);
+    logInfo("Updating department", { filePath: "repo.js", methodName: "updateDepartment", departmentId, name, description, ministryId });
+    const department = await Department.findByPk(departmentId);
     if (department) {
       department.name = name;
       department.description = description;
-      department.ministry_id = ministry_id;
+      department.ministryId = ministryId;
       await department.save();
       logInfo("Department updated successfully", { filePath: "repo.js", methodName: "updateDepartment", department });
       return department;
@@ -57,13 +73,13 @@ const updateDepartment = async (dep_id, { name, description, ministry_id }) => {
     throw new Error("Error updating department: " + error.message);
   }
 };
-const deleteDepartment = async (dep_id) => {
+const deleteDepartment = async (departmentId) => {
   try {
-    logInfo("Deleting department", { filePath: "repo.js", methodName: "deleteDepartment", dep_id });
-    const department = await Department.findByPk(dep_id);
+    logInfo("Deleting department", { filePath: "repo.js", methodName: "deleteDepartment", departmentId });
+    const department = await Department.findByPk(departmentId);
     if (department) {
       await department.destroy();
-      logInfo("Department deleted successfully", { filePath: "repo.js", methodName: "deleteDepartment", dep_id });
+      logInfo("Department deleted successfully", { filePath: "repo.js", methodName: "deleteDepartment", departmentId });
       return { message: "Department deleted successfully" };
     } else {
       throw new Error("Department not found");

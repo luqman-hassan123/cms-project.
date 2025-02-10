@@ -11,7 +11,7 @@ const createEmpCarAllocation = async (empCarAllocationData) => {
         logInfo('Employee car allocation created successfully', {
             filePath: 'repositories/empCarAllocationRepo',
             methodName: 'createEmpCarAllocation',
-            empCarAlloId: newEmpCarAllocation.id,
+            empCarAllocationId: newEmpCarAllocation.id,
         });
         return newEmpCarAllocation;
     } catch (error) {
@@ -45,25 +45,25 @@ const getEmpCarAllocations = async () => {
         throw new Error('Error in retrieving empCarAllocations: ' + error.message);
     }
 };
-const getEmpCarAllocationById = async (empCarAlloId) => {
+const getEmpCarAllocationById = async (empCarAllocationId) => {
     try {
         logInfo('Retrieving employee car allocation by ID', {
             filePath: 'repositories/empCarAllocationRepo',
             methodName: 'getEmpCarAllocationById',
-            empCarAlloId,
+            empCarAllocationId,
         });
-        const empCarAllocation = await EmployeeCarAllocation.findByPk(empCarAlloId);
+        const empCarAllocation = await EmployeeCarAllocation.findByPk(empCarAllocationId);
         if (empCarAllocation) {
             logInfo('Employee car allocation retrieved successfully', {
                 filePath: 'repositories/empCarAllocationRepo',
                 methodName: 'getEmpCarAllocationById',
-                empCarAlloId,
+                empCarAllocationId,
             });
         } else {
             logInfo('Employee car allocation not found', {
                 filePath: 'repositories/empCarAllocationRepo',
                 methodName: 'getEmpCarAllocationById',
-                empCarAlloId,
+                empCarAllocationId,
             });
         }
         return empCarAllocation;
@@ -71,34 +71,34 @@ const getEmpCarAllocationById = async (empCarAlloId) => {
         logError('Error in retrieving employee car allocation by ID', {
             filePath: 'repositories/empCarAllocationRepo',
             methodName: 'getEmpCarAllocationById',
-            empCarAlloId,
+            empCarAllocationId,
             error,
         });
         throw new Error('Error in retrieving empCarAllocation by ID: ' + error.message);
     }
 };
-const updateEmpCarAllocation = async (empCarAlloId, empCarAllocationData) => {
+const updateEmpCarAllocation = async (empCarAllocationId, empCarAllocationData) => {
     try {
         logInfo('Updating employee car allocation', {
             filePath: 'repositories/empCarAllocationRepo',
             methodName: 'updateEmpCarAllocation',
-            empCarAlloId,
+            empCarAllocationId,
             empCarAllocationData,
         });
-        const empCarAllocation = await EmployeeCarAllocation.findByPk(empCarAlloId);
+        const empCarAllocation = await EmployeeCarAllocation.findByPk(empCarAllocationId);
         if (empCarAllocation) {
             await empCarAllocation.update(empCarAllocationData);
             logInfo('Employee car allocation updated successfully', {
                 filePath: 'repositories/empCarAllocationRepo',
                 methodName: 'updateEmpCarAllocation',
-                empCarAlloId,
+                empCarAllocationId,
             });
             return empCarAllocation;
         } else {
             logInfo('Employee car allocation not found for update', {
                 filePath: 'repositories/empCarAllocationRepo',
                 methodName: 'updateEmpCarAllocation',
-                empCarAlloId,
+                empCarAllocationId,
             });
             return null;
         }
@@ -106,33 +106,33 @@ const updateEmpCarAllocation = async (empCarAlloId, empCarAllocationData) => {
         logError('Error in updating employee car allocation', {
             filePath: 'repositories/empCarAllocationRepo',
             methodName: 'updateEmpCarAllocation',
-            empCarAlloId,
+            empCarAllocationId,
             error,
         });
         throw new Error('Error in updating empCarAllocation: ' + error.message);
     }
 };
-const deleteEmpCarAllocation = async (empCarAlloId) => {
+const deleteEmpCarAllocation = async (empCarAllocationId) => {
     try {
         logInfo('Deleting employee car allocation', {
             filePath: 'repositories/empCarAllocationRepo',
             methodName: 'deleteEmpCarAllocation',
-            empCarAlloId,
+            empCarAllocationId,
         });
-        const empCarAllocation = await EmployeeCarAllocation.findByPk(empCarAlloId);
+        const empCarAllocation = await EmployeeCarAllocation.findByPk(empCarAllocationId);
         if (empCarAllocation) {
             await empCarAllocation.destroy();
             logInfo('Employee car allocation deleted successfully', {
                 filePath: 'repositories/empCarAllocationRepo',
                 methodName: 'deleteEmpCarAllocation',
-                empCarAlloId,
+                empCarAllocationId,
             });
             return true;
         } else {
             logInfo('Employee car allocation not found for deletion', {
                 filePath: 'repositories/empCarAllocationRepo',
                 methodName: 'deleteEmpCarAllocation',
-                empCarAlloId,
+                empCarAllocationId,
             });
             return false;
         }
@@ -140,7 +140,7 @@ const deleteEmpCarAllocation = async (empCarAlloId) => {
         logError('Error in deleting employee car allocation', {
             filePath: 'repositories/empCarAllocationRepo',
             methodName: 'deleteEmpCarAllocation',
-            empCarAlloId,
+            empCarAllocationId,
             error,
         });
         throw new Error('Error in deleting empCarAllocation: ' + error.message);

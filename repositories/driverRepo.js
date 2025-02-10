@@ -1,56 +1,69 @@
-const Driver = require('../models/Driver');
-
+const Driver = require("../models/Driver");
+const { logInfo, logError } = require("../config/logger");
 
 const createDriver = async (driverData) => {
     try {
+        logInfo("Creating a new driver", { filePath: "driverRepo.js", methodName: "createDriver", driverData });
         const driver = await Driver.create(driverData);
-        console.log("Driver created successfully:", JSON.stringify(driver, null, 2));
+        logInfo("Driver created successfully", { filePath: "driverRepo.js", methodName: "createDriver", driver });
         return driver;
     } catch (error) {
-        throw new Error('Error creating driver in repository: ' + error.message);
+        logError("Error creating driver", { filePath: "driverRepo.js", methodName: "createDriver", error: error.message });
+        throw new Error("Error creating driver: " + error.message);
     }
 };
 const getDrivers = async () => {
     try {
+        logInfo("Fetching all drivers", { filePath: "driverRepo.js", methodName: "getDrivers" });
         const drivers = await Driver.findAll();
-        console.log("Drivers retrieved:", drivers);
+        logInfo("Fetched all drivers successfully", { filePath: "driverRepo.js", methodName: "getDrivers", count: drivers.length });
         return drivers;
     } catch (error) {
-        throw new Error('Error retrieving drivers from repository: ' + error.message);
+        logError("Error retrieving drivers", { filePath: "driverRepo.js", methodName: "getDrivers", error: error.message });
+        throw new Error("Error retrieving drivers: " + error.message);
     }
 };
 const getDriverById = async (driverId) => {
     try {
-        const driver = await Driver.findByPk(driverId); 
+        logInfo("Fetching driver by ID", { filePath: "driverRepo.js", methodName: "getDriverById", driverId });
+        const driver = await Driver.findByPk(driverId);
+        logInfo("Fetched driver successfully", { filePath: "driverRepo.js", methodName: "getDriverById", driver });
         return driver;
     } catch (error) {
-        throw new Error('Error in retrieving driver by ID: ' + error.message);
+        logError("Error retrieving driver by ID", { filePath: "driverRepo.js", methodName: "getDriverById", error: error.message });
+        throw new Error("Error retrieving driver by ID: " + error.message);
     }
 };
 const updateDriver = async (driverId, driverData) => {
     try {
+        logInfo("Updating driver", { filePath: "driverRepo.js", methodName: "updateDriver", driverId, driverData });
         const driver = await Driver.findByPk(driverId);
         if (driver) {
-            await driver.update(driverData); 
+            await driver.update(driverData);
+            logInfo("Driver updated successfully", { filePath: "driverRepo.js", methodName: "updateDriver", driver });
             return driver;
         } else {
-            return null; 
+            throw new Error("Driver not found");
         }
     } catch (error) {
-        throw new Error('Error in updating driver: ' + error.message);
+        logError("Error updating driver", { filePath: "driverRepo.js", methodName: "updateDriver", error: error.message });
+        throw new Error("Error updating driver: " + error.message);
     }
 };
 const deleteDriver = async (driverId) => {
     try {
+        logInfo("Deleting driver", { filePath: "driverRepo.js", methodName: "deleteDriver", driverId });
         const driver = await Driver.findByPk(driverId);
         if (driver) {
-            await driver.destroy(); 
-            return true;
+            await driver.destroy();
+            logInfo("Driver deleted successfully", { filePath: "driverRepo.js", methodName: "deleteDriver", driverId });
+            return { message: "Driver deleted successfully" };
         } else {
-            return false; 
+            throw new Error("Driver not found");
         }
     } catch (error) {
-        throw new Error('Error in deleting driver: ' + error.message);
+        logError("Error deleting driver", { filePath: "driverRepo.js", methodName: "deleteDriver", error: error.message });
+        throw new Error("Error deleting driver: " + error.message);
     }
 };
 

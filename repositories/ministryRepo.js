@@ -30,10 +30,10 @@ const getMinistries = async () => {
         throw new Error('Error retrieving ministries: ' + error.message);
     }
 };
-const getMinistryById = async (ministry_id) => {
+const getMinistryById = async (ministryId) => {
     try {
         logInfo('Fetching ministry by Id', { filePath: 'repositories/ministryRepo', methodName: 'getMinistryById' });
-        const ministryById = await Ministry.findByPk(ministry_id);
+        const ministryById = await Ministry.findByPk(ministryId);
         logInfo('Ministries fetched successfully', { filePath: 'repositories/ministryRepo', methodName: 'getMinistryById', });
         return ministryById;
     } catch (error) {
@@ -41,10 +41,10 @@ const getMinistryById = async (ministry_id) => {
         throw new Error('Error retrieving ministry by ID: ' + error.message);
     }
 };
-const updateMinistry = async (ministry_id, { name, address, description }) => {
+const updateMinistry = async (ministryId, { name, address, description }) => {
     try {
-        logInfo('Updating ministry', { filePath: 'repositories/ministryRepo', methodName: 'updateMinistry', ministry_id });
-        const ministry = await Ministry.findByPk(ministry_id);
+        logInfo('Updating ministry', { filePath: 'repositories/ministryRepo', methodName: 'updateMinistry', ministryId });
+        const ministry = await Ministry.findByPk(ministryId);
         if (ministry) {
             ministry.name = name;
             ministry.address = address;
@@ -53,7 +53,7 @@ const updateMinistry = async (ministry_id, { name, address, description }) => {
             logInfo('Ministry updated successfully', { filePath: 'repositories/ministryRepo', methodName: 'updateMinistry', ministry });
             return ministry;
         } else {
-            logError('Ministry not found', { filePath: 'repositories/ministryRepo', methodName: 'updateMinistry', ministry_id });
+            logError('Ministry not found', { filePath: 'repositories/ministryRepo', methodName: 'updateMinistry', ministryId });
             throw new Error('Ministry not found');
         }
     } catch (error) {
@@ -61,10 +61,10 @@ const updateMinistry = async (ministry_id, { name, address, description }) => {
         throw new Error('Error updating ministry: ' + error.message);
     }
 };
-const deleteMinistry = async (ministry_id) => {
+const deleteMinistry = async (ministryId) => {
     try {
         logInfo('Deleting ministry', { filePath: 'repositories/ministryRepo', methodName: 'deleteMinistry'});
-        const ministry = await Ministry.findByPk(Number(ministry_id));
+        const ministry = await Ministry.findByPk(Number(ministryId));
         if (ministry) {
             await ministry.destroy();
             logInfo('Deleted ministry successfully', { filePath: 'repositories/ministryRepo', methodName: 'deleteMinistry'});

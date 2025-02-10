@@ -34,7 +34,7 @@ const CarDriverReservation = sequelize.define(
 (async () => {
   try {
     await sequelize.sync({ alter: true }); 
-    console.log('Database synced successfully');
+    console.log('CarDriverReservation Database synced successfully');
   } catch (error) {
     console.error('Error syncing database:', error);
   }

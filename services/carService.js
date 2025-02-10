@@ -1,21 +1,21 @@
-const { logInfo } = require('../config/logger');
+const { logInfo, logError } = require('../config/logger');
 const carRepo = require('../repositories/carRepo');
 
 const createCar = async (carData) => {
     try {
         logInfo('creating new car', {filePath: 'services/carService', methodName: 'createCar' , carData});
         const result = await carRepo.createCar(carData);
-        logInfo('car created successfully', {filePath: 'services/departmentService', methodName: 'createCar', carId: result.carId})
+        logInfo('car created successfully', {filePath: 'services/carService', methodName: 'createCar', carId: result.carId})
         return result;
     } catch (error) {
-        logError('Error creating car',{filePath: 'services/departmentService', methodName: 'createCar', error });
+        logError('Error creating car',{filePath: 'services/carService', methodName: 'createCar', error });
     }
 };
 const getCars = async () => {
     try {
         logInfo('Getting all cars', {filePath: 'services/carService', methodName: 'getCars'});
         const cars = await carRepo.getCars();
-        logInfo(`Fetched ${cars.length} cars`, {filePath: 'services/carService', methodName: 'getCars'}); // Correct variable and spelling
+        logInfo(`Fetched ${cars.length} cars`, {filePath: 'services/carService', methodName: 'getCars'});
         return cars; 
     } catch (error) {
         throw new Error('Error in retrieving cars service: ' + error.message);

@@ -1,20 +1,19 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/dbConfig");
-const Department = require("./Department");
 
 const Employee = sequelize.define(
   "Employee",
   {
-    emp_id: {
+    employeeId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    dep_id: {
+    departmentId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    emp_name: {
+    employeeName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -26,7 +25,6 @@ const Employee = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    
   },
   {
     timestamps: true,
@@ -36,7 +34,13 @@ const Employee = sequelize.define(
 );
 
 (async () => {
-  await sequelize.sync({ alter: true }); 
+  try {
+    await sequelize.sync({ alter: true }); 
+    console.log(' Employee Database synced successfully');
+  } catch (error) {
+    console.error('Error syncing Employee database:', error);
+  }
 })();
+
 
 module.exports = Employee;

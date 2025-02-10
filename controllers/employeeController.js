@@ -3,10 +3,10 @@ const employeeService = require("../services/employeeService");
 
 const createEmployee = async (req, res) => {
   try {
-    const { dep_id, emp_name, rank, description } = req.body;
+    const { departmentId, employeeName, rank, description } = req.body;
     const employee = await employeeService.createEmployee(
-      dep_id,
-      emp_name,
+      departmentId,
+      employeeName,
       rank,
       description
     );
@@ -26,8 +26,8 @@ const getAllEmployee = async (req, res) => {
 };
 const getEmployeeById = async (req, res) => {
   try {
-    const { emp_id } = req.params;
-    const employee = await employeeService.getEmployeeById(emp_id);
+    const { employeeId } = req.params;
+    const employee = await employeeService.getEmployeeById(employeeId);
     if (!employee) {
       return res.status(404).json({ message: "Employee not found" });
     }
@@ -38,13 +38,13 @@ const getEmployeeById = async (req, res) => {
 };
 const updateEmployee = async (req, res) => {
   try {
-    const { emp_id } = req.params;
-    const { emp_name, rank, description, dep_id } = req.body;
-    const updateEmployee = await employeeService.updateEmployee(emp_id, {
-      emp_name,
+    const { employeeId } = req.params;
+    const { employeeName, rank, description, departmentId } = req.body;
+    const updateEmployee = await employeeService.updateEmployee(employeeId, {
+      employeeName,
       rank,
       description,
-      dep_id,
+      departmentId,
     });
     if (!updateEmployee) {
       return res.status(404).json({ error: "Employee not found" });
@@ -56,8 +56,8 @@ const updateEmployee = async (req, res) => {
 };
 const deleteEmployee = async (req, res) => {
   try {
-    const { emp_id } = req.params;
-    const result =  await employeeService.deleteEmployee(emp_id);
+    const { employeeId } = req.params;
+    const result =  await employeeService.deleteEmployee(employeeId);
     if (result) {
       res.status(200).json({ message: "Employee deleted successfully" });
     } else {

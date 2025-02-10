@@ -14,9 +14,9 @@ const {
 } = require ('../validation/departmentValidation')
 
 router.post('/', validateCreateDepartment, createDepartment);
-router.delete('/:dep_id', validateDepartmentId ,deleteDepartment);
-router.put('/:dep_id', validateDepartmentId ,validateUpdateDepartment ,updateDepartment);
-router.get('/:dep_id', validateDepartmentId ,getDepartmentById);
+router.delete('/:departmentId', validateDepartmentId ,deleteDepartment);
+router.put('/:departmentId', validateDepartmentId ,validateUpdateDepartment ,updateDepartment);
+router.get('/:departmentId', validateDepartmentId ,getDepartmentById);
 router.get('/' ,getDepartments);
 
 module.exports = router;

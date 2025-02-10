@@ -14,6 +14,9 @@ const validateCarCreation = [
     body('carMake')
         .notEmpty().withMessage('Car make is required')
         .isString().withMessage('Car make must be a string'),
+    body('departmentId')
+        .not().isEmpty().withMessage('Must enter departmentId') 
+        .isInt().withMessage('Department id must be an integer'),
     body('carYear')
         .notEmpty().withMessage('Car year is required')
         .isInt({ min: 1886 }).withMessage('Car year must be a valid year'),
@@ -30,6 +33,8 @@ const validateCarCreation = [
 const validateCarUpdate = [
     body('carId')
         .isInt().withMessage('Car ID must be an integer'),
+    body('departmentId')
+    .isInt().withMessage('Car ID must be an integer'),    
     body('carModel')
         .optional()
         .isString().withMessage('Car model must be a string'),

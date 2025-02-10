@@ -30,12 +30,12 @@ const getDriverCarHistoryById = async (driverCarHistoryId) => {
     try {
       logInfo("Getting DriverCarHistory by ID from repo", { filepath: 'repositories/driverCarHistoryRepo', methodName: 'getDriverCarHistoryById' });
       const history = await DriverCarHistory.findByPk(driverCarHistoryId,
-    //      {
-    //     include: [
-    //       { model: Driver, attributes: ["name", "licenseNumber"] },
-    //       { model: Car, attributes: ["model", "year"] },
-    //     ],
-    //   }
+         {
+        include: [
+          { model: Driver, attributes: ["name", "licenseNumber"] },
+          { model: Car, attributes: ["model", "year"] },
+        ],
+      }
     );
       if (history) {
         logInfo("DriverCarHistory retrieved by ID successfully from repo ", { filepath: 'repositories/driverCarHistoryRepo', methodName: 'getDriverCarHistoryById', history });

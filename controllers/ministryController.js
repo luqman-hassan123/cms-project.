@@ -34,8 +34,8 @@ const getMinistries = async (req, res) => {
 const getMinistryById = async (req, res) => {
     try {
         logInfo('Fetching ministry by Id', { filePath: 'controllers/ministryController', methodName: 'getMinistryById' });
-        const { ministry_id } = req.params;
-        const ministry = await ministryService.getMinistryByIdService(ministry_id);
+        const { ministryId } = req.params;
+        const ministry = await ministryService.getMinistryByIdService(ministryId);
         logInfo('Fetching ministry by Id successfully', { filePath: 'controllers/ministryController', methodName: 'getMinistryById' });
         if (!ministry) {
             logInfo('ministry by Id not found', { filePath: 'controllers/ministryController', methodName: 'getMinistryById' });
@@ -49,12 +49,12 @@ const getMinistryById = async (req, res) => {
 };
 const updateMinistry = async (req, res) => {
     try {
-        const { ministry_id } = req.params;
+        const { ministryId } = req.params;
         const { name, address, description } = req.body;
-        logInfo('Updating ministry', { filePath: 'controllers/ministryController', methodName: 'updateMinistry', ministry_id, name, address, description });
-        const updatedMinistry = await ministryService.updateMinistryService(ministry_id, { name, address, description });
+        logInfo('Updating ministry', { filePath: 'controllers/ministryController', methodName: 'updateMinistry', ministryId, name, address, description });
+        const updatedMinistry = await ministryService.updateMinistryService(ministryId, { name, address, description });
         if (!updatedMinistry) {
-            logInfo('Ministry not found', { filePath: 'controllers/ministryController', methodName: 'updateMinistry', ministry_id });
+            logInfo('Ministry not found', { filePath: 'controllers/ministryController', methodName: 'updateMinistry', ministryId });
             return res.status(404).json({ error: "Ministry not found" });
         }
         logInfo('Ministry updated successfully', { filePath: 'controllers/ministryController', methodName: 'updateMinistry', updatedMinistry });
@@ -66,15 +66,15 @@ const updateMinistry = async (req, res) => {
 };
 const deleteMinistry = async (req, res) => {
     try {
-        const { ministry_id } = req.params;
-        logInfo('Deleting ministry', { filePath: 'controllers/ministryController', methodName: 'deleteMinistry', ministry_id });
+        const { ministryId } = req.params;
+        logInfo('Deleting ministry', { filePath: 'controllers/ministryController', methodName: 'deleteMinistry', ministryId });
 
-        const result = await ministryService.deleteMinistryService(ministry_id);
+        const result = await ministryService.deleteMinistryService(ministryId);
         if (result) {
-            logInfo('Ministry deleted successfully', { filePath: 'controllers/ministryController', methodName: 'deleteMinistry', ministry_id });
+            logInfo('Ministry deleted successfully', { filePath: 'controllers/ministryController', methodName: 'deleteMinistry', ministryId });
             res.status(200).json({ message: "Ministry deleted successfully" });
         } else {
-            logInfo('Ministry not found', { filePath: 'controllers/ministryController', methodName: 'deleteMinistry', ministry_id });
+            logInfo('Ministry not found', { filePath: 'controllers/ministryController', methodName: 'deleteMinistry', ministryId });
             res.status(404).json({ error: "Ministry not found" });
         }
     } catch (err) {

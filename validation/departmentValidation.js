@@ -21,7 +21,7 @@ const validateUpdateDepartment = [
         .isLength({max : 100}).withMessage('Department name must be less than 100 charaters'),
 ];
 const validateDepartmentId = [
-    check ('dep_id')
+    check ('departmentId')
         .trim()
         .isInt().withMessage ('Invalid department ID format')
         .notEmpty().withMessage('Department id require'),

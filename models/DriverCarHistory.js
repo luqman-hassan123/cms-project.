@@ -38,7 +38,12 @@ const DriverCarHistory = sequelize.define(
 );
 
 (async () => {
-  await sequelize.sync({ alter: true });
+  try {
+    await sequelize.sync({ alter: true }); 
+    console.log('DriverCarHistory Database synced successfully');
+  } catch (error) {
+    console.error('Error syncing DriverCarHistory database:', error);
+  }
 })();
 
 module.exports = DriverCarHistory;

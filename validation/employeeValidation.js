@@ -8,7 +8,7 @@ const handleValidationErrors = (req, res, next) => {
   next();
 };
 const validateEmployeeId = [
-  check("emp_id")
+  check("employeeId")
     .isInt({ min: 1 }) 
     .withMessage("Employee ID must be a positive integer")
     .notEmpty()
@@ -16,12 +16,12 @@ const validateEmployeeId = [
   handleValidationErrors,
 ];
 const validateCreateEmployee = [
-  check("emp_name")
+  check("employeeName")
     .isString()
     .withMessage("Employee name must be a string")
     .notEmpty()
     .withMessage("Employee name is required"),
-  check("dep_id")
+  check("departmentId")
     .isInt({ min: 1 }) 
     .withMessage("Department ID must be a positive integer")
     .notEmpty()
@@ -30,12 +30,12 @@ const validateCreateEmployee = [
 ];
 
 const validateUpdateEmployee = [
-  check("emp_name")
+  check("employeeName")
     .isString()
     .withMessage("Employee name must be a string")
     .notEmpty()
     .withMessage("Employee name is required"),
-  check("dep_id")
+  check("departmentId")
     .isInt({ min: 1 }) 
     .withMessage("Department ID must be a positive integer")
     .notEmpty()

@@ -16,9 +16,9 @@ const {
 } = require('../validation/employeeValidation');
 
 router.post('/', validateCreateEmployee, createEmployee);
-router.delete('/:emp_id', validateEmployeeId, deleteEmployee);
-router.put('/:emp_id', validateUpdateEmployee, updateEmployee); 
-router.get('/:emp_id', validateEmployeeId, getEmployeeById); 
+router.delete('/:employeeId', validateEmployeeId, deleteEmployee);
+router.put('/:employeeId', validateUpdateEmployee, updateEmployee); 
+router.get('/:employeeId', validateEmployeeId, getEmployeeById); 
 router.get('/', getAllEmployee ); 
 
 module.exports = router;

@@ -4,7 +4,7 @@ const sequelize = require("../config/dbConfig");
 const Ministry = sequelize.define(
   "Ministry",
   {
-    ministry_id: {
+    ministryId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
@@ -30,7 +30,12 @@ const Ministry = sequelize.define(
 );
 
 (async () => {
-  await sequelize.sync({alter: true});
+  try {
+    await sequelize.sync({ alter: true }); 
+    console.log('Database Ministry synced successfully');
+  } catch (error) {
+    console.error('Error syncing Ministry database:', error);
+  }
 })();
 
 module.exports = Ministry;

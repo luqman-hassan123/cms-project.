@@ -32,7 +32,7 @@ const validateUpdateMinistry = [
   handleValidationErrors,
 ];
 const validateMinistryId = [
-  check("ministry_id")
+  check("ministryId")
     .trim()
     .isInt()
     .withMessage("Invalid Ministry ID format")

@@ -1,7 +1,7 @@
 const { check, validationResult } = require('express-validator');
 
 const validateCreateEmpCarAllocation = [
-    check('emp_id')
+    check('employeeId')
         .notEmpty().withMessage('Employee ID is required')
         .isInt().withMessage('Employee ID must be an integer'),
     check('carId')
@@ -18,7 +18,7 @@ const validateCreateEmpCarAllocation = [
     }
 ];
 const validateUpdateEmpCarAllocation = [
-    check('emp_id')
+    check('employeeId')
         .optional()
         .isInt().withMessage('Employee ID must be an integer'),
     check('carId')
@@ -36,7 +36,7 @@ const validateUpdateEmpCarAllocation = [
     }
 ];
 const validateEmpCarAllocationId = [
-    check('empCarAlloId')
+    check('empCarAllocationId')
         .trim()
         .isInt().withMessage('Invalid EmpCarAllocation ID format')
         .notEmpty().withMessage('EmpCarAllocation ID is required'),
