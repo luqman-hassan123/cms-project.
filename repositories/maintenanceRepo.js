@@ -1,5 +1,6 @@
 const Maintenance = require("../models/Maintenance");
 const { logInfo, logError } = require("../config/logger");
+const Car = require("../models/Car");
 
 const createMaintenance = async (maintenanceData) => {
   try {
@@ -15,7 +16,9 @@ const createMaintenance = async (maintenanceData) => {
 const getAllMaintenance = async () => {
   try {
     logInfo("Fetching all maintenance entries", { filePath: "repositories/maintenanceRepo", methodName: "getAllMaintenance" });
-    const maintenanceEntries = await Maintenance.findAll();
+    const maintenanceEntries = await Maintenance.findAll({
+      include:[Car],
+    });
     logInfo("Maintenance entries fetched successfully", { filePath: "repositories/maintenanceRepo", methodName: "getAllMaintenance", count: maintenanceEntries.length });
     return maintenanceEntries;
   } catch (error) {
@@ -26,7 +29,9 @@ const getAllMaintenance = async () => {
 const getMaintenanceById = async (maintenanceId) => {
   try {
     logInfo("Fetching maintenance entry by ID", { filePath: "repositories/maintenanceRepo", methodName: "getMaintenanceById", maintenanceId });
-    const maintenanceEntry = await Maintenance.findByPk(maintenanceId);
+    const maintenanceEntry = await Maintenance.findByPk(maintenanceId, {
+      include:[Car],
+    });
     if (!maintenanceEntry) {
       logError("Maintenance entry not found", { filePath: "repositories/maintenanceRepo", methodName: "getMaintenanceById", maintenanceId });
       throw new Error("Maintenance entry not found");

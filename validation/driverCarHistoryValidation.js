@@ -12,7 +12,6 @@ const validateDriverCarHistoryId = [
       next();
     },
   ];
-
 const validateCreateHistory = [
   check("driverId")
     .notEmpty().withMessage("Driver ID is required")

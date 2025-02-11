@@ -1,6 +1,5 @@
 const departmentService = require("../services/departmentService");
-const ministryService = require("../services/ministryService");
-const { logInfo, logError } = require ('../config/logger')
+const { logInfo, logError } = require ('../config/logger');
 
 const createDepartment = async (req, res) => {
   try {

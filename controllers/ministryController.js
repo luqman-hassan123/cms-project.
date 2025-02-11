@@ -4,7 +4,6 @@ Just services functions here
 just a few lines of code are enough, all the business logic should
 be there in the service
 */
-
 const ministryService = require('../services/ministryService');
 const { logInfo, logError } = require('../config/logger') 
 

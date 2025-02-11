@@ -1,5 +1,8 @@
 const EmployeeCarAllocation = require('../models/employeeCarAllocation'); 
 const { logInfo, logError } = require ('../config/logger') 
+const Car = require('../models/Car'); 
+const Employee = require('../models/Employee');
+
 const createEmpCarAllocation = async (empCarAllocationData) => {
     try {
         logInfo('Creating employee car allocation', {
@@ -29,7 +32,11 @@ const getEmpCarAllocations = async () => {
             filePath: 'repositories/empCarAllocationRepo',
             methodName: 'getEmpCarAllocations',
         });
-        const empCarAllocations = await EmployeeCarAllocation.findAll(); 
+        const empCarAllocations = await EmployeeCarAllocation.findAll({
+            include: [
+               Car, Employee
+            ]
+        }); 
         logInfo('Employee car allocations retrieved successfully', {
             filePath: 'repositories/empCarAllocationRepo',
             methodName: 'getEmpCarAllocations',
@@ -52,15 +59,19 @@ const getEmpCarAllocationById = async (empCarAllocationId) => {
             methodName: 'getEmpCarAllocationById',
             empCarAllocationId,
         });
-        const empCarAllocation = await EmployeeCarAllocation.findByPk(empCarAllocationId);
+        const empCarAllocation = await EmployeeCarAllocation.findByPk(empCarAllocationId, {
+            include: [
+               Car, Employee
+            ]
+        });
         if (empCarAllocation) {
-            logInfo('Employee car allocation retrieved successfully', {
+            logInfo('Employee car allocation by id retrieved successfully', {
                 filePath: 'repositories/empCarAllocationRepo',
                 methodName: 'getEmpCarAllocationById',
                 empCarAllocationId,
             });
         } else {
-            logInfo('Employee car allocation not found', {
+            logInfo('Employee car allocation by id not found', {
                 filePath: 'repositories/empCarAllocationRepo',
                 methodName: 'getEmpCarAllocationById',
                 empCarAllocationId,
@@ -85,7 +96,7 @@ const updateEmpCarAllocation = async (empCarAllocationId, empCarAllocationData) 
             empCarAllocationId,
             empCarAllocationData,
         });
-        const empCarAllocation = await EmployeeCarAllocation.findByPk(empCarAllocationId);
+        const empCarAllocation = await EmployeeCarAllocation.findByPk(Number(empCarAllocationId));
         if (empCarAllocation) {
             await empCarAllocation.update(empCarAllocationData);
             logInfo('Employee car allocation updated successfully', {

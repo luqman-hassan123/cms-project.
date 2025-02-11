@@ -1,7 +1,6 @@
-const { Employee, Department } = require("../models/Relationships");
 const { logInfo, logError } = require("../config/logger");
-const Relationship =  require ('../models/Relationships')
-
+const Employee = require ('../models/Employee')
+const Department = require ('../models/Department')
 
 const createEmployee = async (departmentId, employeeName, rank, description) => {
   try {
@@ -14,17 +13,12 @@ const createEmployee = async (departmentId, employeeName, rank, description) => 
     throw new Error("Error creating employee: " + error.message);
   }
 };
-
 const getEmployeeById = async (employeeId) => {
   try {
     logInfo("Fetching employee by ID", { filePath: "employeeRepo.js", methodName: "getEmployeeById", employeeId });
     const employee = await Employee.findByPk(employeeId, {
       include: [
-        {
-          model: Department,
-          as: "department",
-          attributes: ["departmentId", "name", "description", "created_at", "updated_at"],
-        },
+       Department
       ],
     });
     logInfo("Fetched employee successfully", { filePath: "employeeRepo.js", methodName: "getEmployeeById", employee });
@@ -34,17 +28,12 @@ const getEmployeeById = async (employeeId) => {
     throw new Error("Error getting employee by ID: " + error.message);
   }
 };
-
 const getAllEmployee = async () => {
   try {
     logInfo("Fetching all employees", { filePath: "employeeRepo.js", methodName: "getAllEmployee" });
     const employees = await Employee.findAll({
       include: [
-        {
-          model: Department,
-          as: "department",
-          attributes: ["departmentId", "name", "description", "created_at", "updated_at"],
-        },
+       Department
       ],
     });
     logInfo("Fetched all employees successfully", { filePath: "employeeRepo.js", methodName: "getAllEmployee", count: employees.length });
@@ -54,7 +43,6 @@ const getAllEmployee = async () => {
     throw new Error("Error getting all employees: " + error.message);
   }
 };
-
 const updateEmployee = async (employeeId, { departmentId, employeeName, rank, description }) => {
   try {
     logInfo("Updating employee", { filePath: "employeeRepo.js", methodName: "updateEmployee", employeeId, departmentId, employeeName, rank, description });
@@ -75,7 +63,6 @@ const updateEmployee = async (employeeId, { departmentId, employeeName, rank, de
     throw new Error("Error updating employee: " + error.message);
   }
 };
-
 const deleteEmployee = async (employeeId) => {
   try {
     logInfo("Deleting employee", { filePath: "employeeRepo.js", methodName: "deleteEmployee", employeeId });

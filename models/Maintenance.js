@@ -14,7 +14,7 @@ const Maintenance = sequelize.define(
             allowNull: false,
         },
         maintenanceDate:{
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
         },
         maintenanceCost:{
@@ -27,14 +27,5 @@ const Maintenance = sequelize.define(
         }
     },
 );
-
-(async () => {
-    try {
-      await sequelize.sync({ alter: true });
-      console.log("maintenance table synchronized successfully.");
-    } catch (error) {
-      console.error("Error during maintenance synchronization:", error);
-    }
-  })();
 
 module.exports = Maintenance;

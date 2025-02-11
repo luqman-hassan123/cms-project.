@@ -45,14 +45,4 @@ const Car = sequelize.define(
   }
 );
 
-(async () => {
-  try {
-    await sequelize.sync({ alter: true }); 
-    console.log("Car table synchronized successfully.");
-  } catch (error) {
-    console.error("Error during car synchronization:", error);
-  }
-})();
-
-
 module.exports = Car;

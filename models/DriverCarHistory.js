@@ -18,11 +18,11 @@ const DriverCarHistory = sequelize.define(
       allowNull: false,
     },
     startDate: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
     endDate: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: true,
     },
     description: {
@@ -36,14 +36,5 @@ const DriverCarHistory = sequelize.define(
     updatedAt: "updated_at",
   }
 );
-
-(async () => {
-  try {
-    await sequelize.sync({ alter: true }); 
-    console.log('DriverCarHistory Database synced successfully');
-  } catch (error) {
-    console.error('Error syncing DriverCarHistory database:', error);
-  }
-})();
 
 module.exports = DriverCarHistory;

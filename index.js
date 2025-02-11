@@ -15,6 +15,7 @@ const userRoute = require ('./routes/userRoute')
 const fuelRoute = require ('./routes/fuelRoute')
 const budgetRoute = require ('./routes/budgetRoute')
 const maintenanceRoute = require ('./routes/maintenanceRoute')
+const setupRelationships = require('./models/Relationships')
 
 dotenv.config();
 //Routes-> Controller -> Services -> Buissness Logic + Repositoies
@@ -34,7 +35,17 @@ app.use(basePath + '/fuel', fuelRoute)
 app.use(basePath + '/budget' , budgetRoute)
 app.use(basePath + '/maintenance' , maintenanceRoute)
 
-dbConfig.authenticate();
+const connectDB = async () => {
+    try {
+      await dbConfig.authenticate();
+      console.log("Database connected successfully.");
+      setupRelationships();
+      console.log("Relationships initialized.");
+    } catch (error) {
+      console.error("Error connecting to database:", error);
+    }
+  };
+  connectDB();
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

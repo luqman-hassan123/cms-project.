@@ -2,16 +2,15 @@
 Just all database queries and functions
 all daatabase function must be in repo file and also custom queries 
 */
-const { Ministry, Department } = require("../models/Relationships");
+const Department = require ('../models/Department')
+const Ministry = require ('../models/Ministry')
 const { logInfo, logError } = require ('../config/logger')
-const Relationship =  require ('../models/Relationships')
 
 const createDepartment = async (name, description, ministryId) => {
   try {
     logInfo("Creating a new department", { filePath: "repo.js", methodName: "createDepartment", name, description, ministryId });
     const department = await Department.create({ name, description, ministryId });
     logInfo("Department created successfully", { filePath: "repo.js", methodName: "createDepartment", department });
-    
     return department;
   } catch (error) {
     logError("Error creating department", { filePath: "repo.js", methodName: "createDepartment", error: error.message });
@@ -22,13 +21,7 @@ const getAllDepartment = async () => {
   try {
     logInfo("Fetching all departments", { filePath: "repo.js", methodName: "getAllDepartment" });
     const departments = await Department.findAll({
-      include: [
-      {
-        model: Ministry, 
-        as: "ministry",   
-        attributes: ["ministryId", "name", "address", "description", "created_at", "updated_at"],
-      },
-    ],
+      include: [Ministry],
     });
     logInfo("Fetched all departments successfully", { filePath: "repo.js", methodName: "getAllDepartment", count: departments.length });
     return departments;
@@ -40,13 +33,9 @@ const getAllDepartment = async () => {
 const getDepartmentById = async (departmentId) => {
   try {
     logInfo("Fetching department by ID", { filePath: "repo.js", methodName: "getDepartmentById", departmentId });
-    const department = await Department.findByPk(departmentId, {include: [
-        {
-          model: Ministry,
-          as: "ministry",
-          attributes: ["ministryId", "name", "address", "description", "created_at", "updated_at"],
-        },
-      ],});
+    const department = await Department.findByPk(departmentId, {
+      include: [Ministry],
+    });
     logInfo("Fetched department successfully", { filePath: "repo.js", methodName: "getDepartmentById", department });
     return department;
   } catch (error) {

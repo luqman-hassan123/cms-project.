@@ -29,13 +29,4 @@ const Department = sequelize.define(
   }
 );
 
-(async () => {
-  try {
-    await sequelize.sync({ alter: true }); 
-    console.log("department table synchronized successfully.");
-  } catch (error) {
-    console.error("Error during department synchronization:", error);
-  }
-})();
-
 module.exports = Department;

@@ -8,16 +8,9 @@ const handleValidationErrors = (req, res, next) => {
     next();
 };
 const validateBudgetCreation = [
-    body('dep_id')
+    body('departmentId')
         .notEmpty().withMessage('Department ID is required')
         .isInt().withMessage('Department ID must be an integer'),
-        // .custom(async (value) => {
-        //     const department = await sequelize.models.Department.findByPk(value);
-        //     if (!department) {
-        //         throw new Error('Department ID does not exist');
-        //     }
-        //     return true;
-        // }),
     body('newCarBudget')
         .notEmpty().withMessage('New Car Budget is required')
         .isFloat({ min: 0 }).withMessage('New Car Budget must be a positive number'),
@@ -31,18 +24,9 @@ const validateBudgetCreation = [
     handleValidationErrors,
 ];
 const validateBudgetUpdate = [
-    body('dep_id')
+    body('departmentId')
         .optional()
         .isInt().withMessage('Department ID must be an integer'),
-        // .custom(async (value) => {
-        //     if (value) {
-        //         const department = await sequelize.models.Department.findByPk(value);
-        //         if (!department) {
-        //             throw new Error('Department ID does not exist');
-        //         }
-        //     }
-        //     return true;
-        // }),
     body('newCarBudget')
         .optional()
         .isFloat({ min: 0 }).withMessage('New Car Budget must be a positive number'),

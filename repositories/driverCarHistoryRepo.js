@@ -3,7 +3,6 @@ const Driver = require ('../models/Driver')
 const Car = require ('../models/Car')
 const { logInfo, logError } = require('../config/logger') 
 
-
 const createDriverCarHistory = async (historyData) => {
   try {
     logInfo("Creating DriverCarHistory form repo", { filepath:'repositories/driverCarHistoryRepo', methodName: 'createDriverCarHistory' });
@@ -18,7 +17,9 @@ const createDriverCarHistory = async (historyData) => {
 const getAllDriverCarHistories = async () => {
   try {
     logInfo("getting DriverCarHistory from repo", { filepath:"repositories/driverCarHistoryRepo", methodName: 'getAllDriverCarHistories' });
-    const histories = await DriverCarHistory.findAll();
+    const histories = await DriverCarHistory.findAll(  {
+      include: [Car, Driver],
+    });
     logInfo("DriverCarHistories retrieved successfully", {  filepath:'repositories/driverCarHistoryRepo', methodName: 'getAllDriverCarHistories', histories });
     return histories;
   } catch (error) {
@@ -31,10 +32,7 @@ const getDriverCarHistoryById = async (driverCarHistoryId) => {
       logInfo("Getting DriverCarHistory by ID from repo", { filepath: 'repositories/driverCarHistoryRepo', methodName: 'getDriverCarHistoryById' });
       const history = await DriverCarHistory.findByPk(driverCarHistoryId,
          {
-        include: [
-          { model: Driver, attributes: ["name", "licenseNumber"] },
-          { model: Car, attributes: ["model", "year"] },
-        ],
+        include: [Car, Driver],
       }
     );
       if (history) {

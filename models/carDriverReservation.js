@@ -1,7 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/dbConfig");
-const Car = require("./Car"); 
-const Driver = require("./Driver"); 
 
 const CarDriverReservation = sequelize.define(
   "CarDriverReservation",
@@ -30,14 +28,5 @@ const CarDriverReservation = sequelize.define(
     updatedAt: "updated_at",
   }
 );
-
-(async () => {
-  try {
-    await sequelize.sync({ alter: true }); 
-    console.log('CarDriverReservation Database synced successfully');
-  } catch (error) {
-    console.error('Error syncing database:', error);
-  }
-})();
 
 module.exports = CarDriverReservation;

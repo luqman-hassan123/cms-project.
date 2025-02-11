@@ -1,7 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/dbConfig");
-const Car = require("./Car");
-const Employee = require("./Employee"); 
 
 const CarEmployeeHistory = sequelize.define(
   "CarEmployeeHistory",
@@ -20,11 +18,11 @@ const CarEmployeeHistory = sequelize.define(
       allowNull: false,
     },
     startDate: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
     endDate: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: true, 
     },
     description: {
@@ -38,14 +36,5 @@ const CarEmployeeHistory = sequelize.define(
     updatedAt: "updated_at",
   }
 );
-
-(async () => {
-  try {
-    await sequelize.sync({ alter: true }); 
-    console.log("car employee history table synchronized successfully.");
-  } catch (error) {
-    console.error("Error during car employee history  synchronization:", error);
-  }
-})();
 
 module.exports = CarEmployeeHistory;
