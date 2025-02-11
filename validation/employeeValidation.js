@@ -28,7 +28,6 @@ const validateCreateEmployee = [
     .withMessage("Department ID is required"),
   handleValidationErrors,
 ];
-
 const validateUpdateEmployee = [
   check("employeeName")
     .isString()

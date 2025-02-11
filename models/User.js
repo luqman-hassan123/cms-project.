@@ -28,13 +28,4 @@ const User = sequelize.define(
     updatedAt: "updated_at",
 });
 
-(async () => {
-    try {
-      await sequelize.sync({ alter: true });
-      console.log("user table synchronized successfully.");
-    } catch (error) {
-      console.error("Error during user synchronization:", error);
-    }
-  })();
-
 module.exports = User;

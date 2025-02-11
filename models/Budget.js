@@ -33,13 +33,4 @@ const Budget = sequelize.define(
   }
 );
 
-(async () => {
-  try {
-    await sequelize.sync({ alter: true });
-    console.log("Budget table synchronized successfully.");
-  } catch (error) {
-    console.error("Error during budget synchronization:", error);
-  }
-})();
-
 module.exports = Budget;

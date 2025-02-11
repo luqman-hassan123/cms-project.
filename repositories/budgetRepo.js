@@ -1,5 +1,6 @@
 const Budget = require('../models/Budget');
 const { logInfo, logError } = require('../config/logger');
+const Department = require('../models/Department');
 
 const createBudget = async (budgetData) => {
   try {
@@ -23,7 +24,9 @@ const createBudget = async (budgetData) => {
 const getBudgets = async () => {
   try {
     logInfo('Fetching all budgets', { filePath: 'repositories/budgetRepo', methodName: 'getBudgets' });
-    const budgets = await Budget.findAll();
+    const budgets = await Budget.findAll({
+      include: [Department]
+    });
     logInfo('Budgets fetched successfully', {
       filePath: 'repositories/budgetRepo',
       methodName: 'getBudgets',
@@ -42,7 +45,9 @@ const getBudgets = async () => {
 const getBudgetById = async (budgetId) => {
   try {
     logInfo('Fetching budget by ID', { filePath: 'repositories/budgetRepo', methodName: 'getBudgetById' });
-    const budget = await Budget.findByPk(budgetId);
+    const budget = await Budget.findByPk(budgetId, {
+      include: [Department]
+    });
     logInfo('Budget fetched successfully', { filePath: 'repositories/budgetRepo', methodName: 'getBudgetById' });
     return budget;
   } catch (error) {

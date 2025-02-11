@@ -29,13 +29,4 @@ const EmpCarAllocation = sequelize.define(
   }
 );
 
-(async () => {
-  try {
-    await sequelize.sync({ alter: true }); 
-    console.log('Database synced successfully');
-  } catch (error) {
-    console.error('Error syncing database:', error);
-  }
-})();
-
 module.exports = EmpCarAllocation;

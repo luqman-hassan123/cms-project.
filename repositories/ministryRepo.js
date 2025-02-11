@@ -4,7 +4,6 @@ all daatabase function must be in repo file and also custom queries
 then these queries will be call in the services file
 //DB queries, network calls,IO (file reading or writing)
 */
-
 const Ministry = require('../models/Ministry');
 const { logInfo, logError } = require ('../config/logger')
 

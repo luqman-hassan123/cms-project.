@@ -29,13 +29,4 @@ const Ministry = sequelize.define(
   }
 );
 
-(async () => {
-  try {
-    await sequelize.sync({ alter: true }); 
-    console.log('Database Ministry synced successfully');
-  } catch (error) {
-    console.error('Error syncing Ministry database:', error);
-  }
-})();
-
 module.exports = Ministry;

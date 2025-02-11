@@ -26,7 +26,7 @@ const Fuel = sequelize.define(
         allowNull: false,
     },
     date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
@@ -37,15 +37,6 @@ const Fuel = sequelize.define(
     updatedAt: "updated_at",
   }
 );
-
-(async () => {
-  try {
-    await sequelize.sync({ alter: true });
-    console.log("Fuel table synchronized successfully.");
-  } catch (error) {
-    console.error("Error during fuel synchronization:", error);
-  }
-})();
 
 module.exports = Fuel;
 

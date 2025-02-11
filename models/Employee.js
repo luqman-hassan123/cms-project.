@@ -33,14 +33,4 @@ const Employee = sequelize.define(
   }
 );
 
-(async () => {
-  try {
-    await sequelize.sync({ alter: true }); 
-    console.log(' Employee Database synced successfully');
-  } catch (error) {
-    console.error('Error syncing Employee database:', error);
-  }
-})();
-
-
 module.exports = Employee;

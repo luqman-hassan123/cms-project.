@@ -39,13 +39,4 @@ const Driver = sequelize.define(
   }
 );
 
-(async () => {
-  try {
-    await sequelize.sync({ alter: true }); 
-    console.log('Driver Database synced successfully');
-  } catch (error) {
-    console.error('Error syncing Driver table database:', error);
-  }
-})();
-
 module.exports = Driver;

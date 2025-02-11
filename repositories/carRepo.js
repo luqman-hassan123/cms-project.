@@ -1,9 +1,6 @@
 const { logInfo, logError } = require ('../config/logger');
-const Car = require('../models/Relationships');
-const  Driver = require ('../models/Relationships')
-const Relationship =  require ('../models/Relationships')
-
-
+const Car = require('../models/Car');
+const Department = require ('../models/Department')
 
 const createCar = async (carData) => {
     try {
@@ -21,11 +18,7 @@ const getCars = async () => {
         logInfo("Fetching all cars", { filePath: "repo.js", methodName: "getCars" });
         const cars = await Car.findAll( {
             include: [
-              {
-                model: Department,
-                as: "department",
-                attributes: ["departmentId", "name", "description", "created_at", "updated_at"],
-              },
+             Department
             ],
           });
         logInfo("Fetched all cars successfully", { filePath: "repo.js", methodName: "getCars", count: cars.length });
@@ -38,13 +31,9 @@ const getCars = async () => {
 const getCarById = async (carId) => {
     try {
         logInfo("Fetching car by ID", { filePath: "repo.js", methodName: "getCarById", carId });
-        const car = await Car.findByPk(carId,  {
+        const car = await Car.findByPk(carId, {
             include: [
-              {
-                model: Department,
-                as: "department",
-                attributes: ["departmentId", "name", "description", "created_at", "updated_at"],
-              },
+             Department
             ],
           });
         logInfo("Fetched car successfully", { filePath: "repo.js", methodName: "getCarById", car });

@@ -1,5 +1,7 @@
-const Driver = require("../models/Driver");
+//const Driver = require("../models/Driver");
 const { logInfo, logError } = require("../config/logger");
+const Driver  = require("../models/Driver");
+const Department = require ('../models/Department')
 
 const createDriver = async (driverData) => {
     try {
@@ -15,7 +17,11 @@ const createDriver = async (driverData) => {
 const getDrivers = async () => {
     try {
         logInfo("Fetching all drivers", { filePath: "driverRepo.js", methodName: "getDrivers" });
-        const drivers = await Driver.findAll();
+        const drivers = await Driver.findAll({
+            include: [
+             Department
+            ],
+          });
         logInfo("Fetched all drivers successfully", { filePath: "driverRepo.js", methodName: "getDrivers", count: drivers.length });
         return drivers;
     } catch (error) {
@@ -26,7 +32,11 @@ const getDrivers = async () => {
 const getDriverById = async (driverId) => {
     try {
         logInfo("Fetching driver by ID", { filePath: "driverRepo.js", methodName: "getDriverById", driverId });
-        const driver = await Driver.findByPk(driverId);
+        const driver = await Driver.findByPk(driverId,{
+            include: [
+             Department
+            ],
+          });
         logInfo("Fetched driver successfully", { filePath: "driverRepo.js", methodName: "getDriverById", driver });
         return driver;
     } catch (error) {

@@ -1,4 +1,4 @@
-const { body, param, check, validationResult } = require('express-validator');
+const { body, check, validationResult } = require('express-validator');
 
 const handleValidationErrors = (req, res, next) => {
     const errors = validationResult(req);
@@ -8,15 +8,15 @@ const handleValidationErrors = (req, res, next) => {
     next();
 };
 const validateCarCreation = [
+    body('departmentId')
+        .not().isEmpty().withMessage('Must enter departmentId') 
+        .isInt().withMessage('Department id must be an integer'),
     body('carModel')
         .notEmpty().withMessage('Car model is required')
         .isString().withMessage('Car model must be a string'),
     body('carMake')
         .notEmpty().withMessage('Car make is required')
         .isString().withMessage('Car make must be a string'),
-    body('departmentId')
-        .not().isEmpty().withMessage('Must enter departmentId') 
-        .isInt().withMessage('Department id must be an integer'),
     body('carYear')
         .notEmpty().withMessage('Car year is required')
         .isInt({ min: 1886 }).withMessage('Car year must be a valid year'),
@@ -31,10 +31,11 @@ const validateCarCreation = [
         .isString().withMessage('Car description must be a string if provided'),
 ];
 const validateCarUpdate = [
+    body('departmentId')
+        .not().isEmpty().withMessage('Must enter departmentId') 
+        .isInt().withMessage('Department id must be an integer'),
     body('carId')
         .isInt().withMessage('Car ID must be an integer'),
-    body('departmentId')
-    .isInt().withMessage('Car ID must be an integer'),    
     body('carModel')
         .optional()
         .isString().withMessage('Car model must be a string'),
@@ -64,8 +65,6 @@ const validateCarId = [
     .withMessage("car ID is required"),
   handleValidationErrors,
 ];
-
-
 
 module.exports = {
     validateCarCreation,

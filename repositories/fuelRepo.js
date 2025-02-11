@@ -1,5 +1,6 @@
 const Fuel = require("../models/Fuel");
 const { logInfo, logError } = require("../config/logger");
+const Car = require("../models/Car");
 
 const createFuel = async (fuelData) => {
   try {
@@ -15,7 +16,9 @@ const createFuel = async (fuelData) => {
 const getAllFuel = async () => {
   try {
     logInfo("Fetching all fuel entries", { filePath: "repositories/fuelRepo", methodName: "getAllFuelEntries" });
-    const fuelEntries = await Fuel.findAll();
+    const fuelEntries = await Fuel.findAll({
+      include: [Car],
+    });
     logInfo("Fuel entries fetched successfully", { filePath: "repositories/fuelRepo", methodName: "getAllFuelEntries", count: fuelEntries.length });
     return fuelEntries;
   } catch (error) {
@@ -26,7 +29,9 @@ const getAllFuel = async () => {
 const getFuelById = async (fuelId) => {
   try {
     logInfo("Fetching fuel entry by ID", { filePath: "repositories/fuelRepo", methodName: "getFuelEntryById" });
-    const fuelEntry = await Fuel.findByPk(fuelId);
+    const fuelEntry = await Fuel.findByPk(fuelId, {
+      include: [Car],
+    });
     if (!fuelEntry) {
       logError("Fuel entry not found", { filePath: "repositories/fuelRepo", methodName: "getFuelEntryById", fuelId });
       throw new Error("Fuel entry not found");

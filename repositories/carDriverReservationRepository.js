@@ -3,6 +3,7 @@ const Car = require("../models/Car");
 const Driver = require("../models/Driver");
 const { logInfo, logError } = require ('../config/logger')
 
+
 const createCarDriverReservation = async (reservationData) => {
   try {
     const reservation = await CarDriverReservation.create(reservationData);
@@ -23,10 +24,7 @@ const createCarDriverReservation = async (reservationData) => {
 const getCarDriverReservations = async () => {
   try {
     const reservations = await CarDriverReservation.findAll({
-      include: [
-        { model: Car, attributes: ["carId", "carName", "carModel"] },
-        { model: Driver, attributes: ["driverId", "driverName", "driverLicenseNumber"] },
-      ],
+      include: [Car, Driver],
     });
     logInfo("Reservations retrieved successfully", {
       filePath: "repositories/carDriverReservationRepository",
@@ -48,13 +46,9 @@ const getCarDriverReservationById = async (reservationId) => {
     logInfo("Accessing car driver reservation by Id", {
       filePath: "repositories/carDriverReservationRepository",
       methodName: "getCarDriverReservationById",
-      data: reservation,
     });
-    const reservation = await CarDriverReservation.findByPk(reservationId, {
-      include: [
-        { model: Car, attributes: ["carId", "carName", "carModel"] },
-        { model: Driver, attributes: ["driverId", "driverName", "driverLicenseNumber"] },
-      ],
+    const reservation = await CarDriverReservation.findByPk(reservationId,{
+      include: [Car, Driver],
     });
     if (!reservation) {
       throw new Error("Reservation not found");

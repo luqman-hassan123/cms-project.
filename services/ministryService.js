@@ -2,7 +2,6 @@
 /*
 in this file call only the function which define in the repository file 
 call to repositores functions and expose it to just controller
-
 */
 const ministryRepo = require('../repositories/ministryRepo');
 const { logInfo, logError } = require('../config/logger'); 
