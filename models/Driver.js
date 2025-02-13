@@ -19,7 +19,6 @@ const Driver = sequelize.define(
     },
     driverLicenseNumber: {
       type: DataTypes.STRING,
-      unique: true,
       allowNull: false,
     },
     driverAvailability: {

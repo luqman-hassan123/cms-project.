@@ -24,8 +24,13 @@ const Maintenance = sequelize.define(
         maintenanceDescription:{
             type: DataTypes.STRING,
             allowNull: true,
-        }
+        },
     },
+    {
+        timestamps: true,
+        createdAt: "created_at",
+        updatedAt: "updated_at",
+      }
 );
 
 module.exports = Maintenance;
