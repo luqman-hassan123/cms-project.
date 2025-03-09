@@ -16,6 +16,7 @@ const fuelRoute = require ('./routes/fuelRoute')
 const budgetRoute = require ('./routes/budgetRoute')
 const maintenanceRoute = require ('./routes/maintenanceRoute')
 const setupRelationships = require('./models/Relationships')
+const authRoutes = require("./routes/authRoutes");
 
 dotenv.config();
 //Routes-> Controller -> Services -> Buissness Logic + Repositoies
@@ -34,6 +35,7 @@ app.use(basePath + '/user', userRoute)
 app.use(basePath + '/fuel', fuelRoute)
 app.use(basePath + '/budget' , budgetRoute)
 app.use(basePath + '/maintenance' , maintenanceRoute)
+app.use(basePath +  '/auth', authRoutes);
 
 const connectDB = async () => {
     try {
