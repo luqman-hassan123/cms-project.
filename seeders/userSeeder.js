@@ -1,13 +1,18 @@
-const { QueryInterface } = require("sequelize");
+//const { queryInterface } = require("sequelize");
 const bcrypt = require("bcrypt");
 
 module.exports = {
-  up: async (QueryInterface) => {
+  up: async (queryInterface) => {
+    
+    // Delete all previous records
+    await queryInterface.bulkDelete("users", null, {});
+    // Reset the auto-increment sequence
+    await queryInterface.sequelize.query("ALTER TABLE users AUTO_INCREMENT = 1");
     const hashedPassword1 = await bcrypt.hash("password123", 10);
     const hashedPassword2 = await bcrypt.hash("securepass456", 10);
     const hashedPassword3 = await bcrypt.hash("admin789", 10);
 
-    return QueryInterface.bulkInsert("users", [
+    return queryInterface.bulkInsert("users", [
       {
         userName: "john_doe",
         userPassword: hashedPassword1,
@@ -31,7 +36,7 @@ module.exports = {
       },
     ]);
   },
-  down: async (QueryInterface) => {
-    return QueryInterface.bulkDelete("users", null, {});
+  down: async (queryInterface) => {
+    await queryInterface.bulkDelete("users", null, { truncate: true, cascade: true, restartIdentity: true });
   },
 };

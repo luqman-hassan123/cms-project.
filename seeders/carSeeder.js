@@ -1,8 +1,10 @@
-const { QueryInterface, DATEONLY } = require("sequelize");
-
 module.exports = {
-  up: async (QueryInterface) => {
-    return QueryInterface.bulkInsert("cars", [ 
+  up: async (queryInterface) => {
+    // Delete all previous records
+    await queryInterface.bulkDelete("cars", null, {});
+    // Reset the auto-increment sequence
+    await queryInterface.sequelize.query("ALTER TABLE cars AUTO_INCREMENT = 1");
+    return queryInterface.bulkInsert("cars", [ 
       {
         departmentId: 1,
         carModel: "2022",
@@ -38,7 +40,7 @@ module.exports = {
       },
     ]);
   },
-  down: async (QueryInterface) => {
-    return QueryInterface.bulkDelete("cars", null, {});
+  down: async (queryInterface) => {
+    return queryInterface.bulkDelete("cars", null, { truncate: true, cascade: true, restartIdentity: true });
   },
 };
