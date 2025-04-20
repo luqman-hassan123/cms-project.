@@ -10,6 +10,8 @@ const DriverCarHistory = require("./DriverCarHistory");
 const Budget = require("./Budget");
 const Fuel = require("./Fuel");
 const Maintenance = require("./Maintenance"); 
+const userRole = require("./userRole")
+const permission = require("./permission");
 
 function setupRelationships(){
 // Ministry has many Departments
@@ -53,6 +55,30 @@ Fuel.belongsTo(Car, { foreignKey: 'carId' });
 //maintenance-car
 Car.hasMany(Maintenance, { foreignKey: 'carId', onDelete: 'CASCADE' });
 Maintenance.belongsTo(Car, {foreignKey: 'carId'})
+
+// userRole and permission relationship
+userRole.belongsToMany(permission, { 
+    through: AssignPermissionToRoles, 
+    foreignKey: 'userRoleId',
+    otherKey: 'permissionId' 
+  });
+  permission.belongsToMany(userRole, { 
+    through: AssignPermissionToRoles, 
+    foreignKey: 'permissionId',  
+    otherKey: 'userRoleId'
+  });
+  
+// user and userRole relationship
+user.belongsToMany(userRole, {
+    through: AssignRolesToUser,
+    foreignKey: 'userId', 
+    otherKey: 'userRoleId'
+  });
+  userRole.belongsToMany(user, {
+    through: AssignRolesToUser,
+    foreignKey: 'userRoleId',
+    otherKey: 'userId'
+  });
 }
 
 module.exports = setupRelationships;
