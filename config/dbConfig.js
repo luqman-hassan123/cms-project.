@@ -4,7 +4,7 @@ require('dotenv').config();
 const sequelize = new Sequelize({
     host: process.env.DB_HOST || 'localhost',
     username: process.env.DB_USER || 'root',
-    password: process.env.DB_PASS || 'admin',
+    password: process.env.DB_PASS || '123456',
     database: process.env.DB_NAME || 'cms',
     dialect: 'mysql',
     logging: true, 

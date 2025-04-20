@@ -59,3 +59,5 @@ module.exports = {
   updateUser,
   deleteUser,
 };
+console.log("Exported in userController functions:", module.exports);
+
