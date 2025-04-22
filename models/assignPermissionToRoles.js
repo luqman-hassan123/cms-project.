@@ -1,24 +1,31 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/dbConfig");
-const UserRole = require("./userRole");
-const Permission = require("./permission");
 
-const AssignPermissionToRoles = sequelize.define("assign_permission_to_roles", {
+const AssignPermissionToRole = sequelize.define("assignPermissiontoRole", {
+  assignPermissionToRoleId:{
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey:true,
+  },
   userRoleId: {
     type: DataTypes.INTEGER,
-    references: {
-      model: UserRole,
-      key: "roleId",
-    },
+    allowNull: false,
   },
   permissionId: {
     type: DataTypes.INTEGER,
-    references: {
-      model: Permission,
-      key: "permissionId",
-    },
+    allowNull:false,
   },
-});
+  description: {
+    type: DataTypes.STRING,
+    allowNull: true,
+}
+},
+{
+timestamps: true,
+createdAt: "created_at", 
+updatedAt: "updated_at", 
+},
+);
 
-module.exports = AssignPermissionToRoles;
+module.exports = AssignPermissionToRole;
 

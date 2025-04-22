@@ -30,7 +30,11 @@ const Fuel = sequelize.define(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-  },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true,
+  }
+},
   {
     timestamps: true,
     createdAt: "created_at",

@@ -30,11 +30,6 @@ const {
 // protected routes
 
 router.post('/', authMiddleware, validateUserCreation, createUser);
-console.log("getUsers before route definition:", getUsers);
-console.log("authMiddleware:", authMiddleware);
-console.log("permissionMiddleware:", permissionMiddleware);
-console.log("getUsers:", getUsers);
-
 router.get('/', authMiddleware, permissionMiddleware("view_users"), getUsers);
 router.get('/:userId', authMiddleware, permissionMiddleware("view_users") ,validateUserId, getUserById);
 router.put('/:userId', authMiddleware, permissionMiddleware("edit_user") ,validateUserUpdate, updateUser);
