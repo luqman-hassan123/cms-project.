@@ -12,6 +12,16 @@ const Permission = sequelize.define("permissions", {
     allowNull: false,
     unique: true,
   },
-});
+  description: {
+    type: DataTypes.STRING,
+    allowNull: true,
+}
+},
+{
+timestamps: true,
+createdAt: "created_at", 
+updatedAt: "updated_at", 
+}
+);
 
 module.exports = Permission;
