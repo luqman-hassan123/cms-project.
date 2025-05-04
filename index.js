@@ -19,6 +19,7 @@ const setupRelationships = require('./models/Relationships')
 const authRoutes = require("./routes/authRoutes");
 const userRoleRoute = require('./routes/userRoleRoute')
 const permissionRoute = require ('./routes/permissionRoute')
+const assignPermissionToRoleRoute = require('./routes/assignPermissionToRoleRoute')
 
 dotenv.config();
 //Routes-> Controller -> Services -> Buissness Logic + Repositoies
@@ -40,6 +41,7 @@ app.use(basePath + '/maintenance' , maintenanceRoute)
 app.use(basePath +  '/auth', authRoutes);
 app.use(basePath + '/userRole', userRoleRoute)
 app.use(basePath + '/permission', permissionRoute)
+app.use(basePath + '/assignPermissionToRoles', assignPermissionToRoleRoute)
 
 const connectDB = async () => {
     try {

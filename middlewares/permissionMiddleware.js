@@ -1,5 +1,5 @@
 const AssignRolesToUser = require("../models/assignRolesToUser");
-const AssignPermissionToRoles = require("../models/assignPermissionToRoles");
+const AssignPermissionToRoles = require("../models/assignPermissionToRole");
 const UserRole = require("../models/userRole");
 const Permission = require("../models/permission");
 
