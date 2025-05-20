@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 
 module.exports = {
   up: async (queryInterface) => {
-    
     // Delete all previous records
     await queryInterface.bulkDelete("users", null, {});
     // Reset the auto-increment sequence
