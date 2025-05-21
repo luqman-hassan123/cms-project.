@@ -14,7 +14,7 @@ const validateCreateDepartment = [
             next();
         }
 ];
-const validateUpdateDepartment = [ 
+const validateUpdateDepartment = [
     check ('departmentId')
         .trim()
         .isInt().withMessage ('Invalid department ID format')
@@ -38,7 +38,6 @@ const validateDepartmentId = [
         next();
     }
 ];
-
 module.exports = {
     validateCreateDepartment,
     validateUpdateDepartment,

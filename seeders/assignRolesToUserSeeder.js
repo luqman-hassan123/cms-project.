@@ -1,11 +1,11 @@
 module.exports = {
   up: async (queryInterface) => {
     // Delete existing assignments
-    await queryInterface.bulkDelete("assignRolesToUser", null, {});
+    await queryInterface.bulkDelete("assignrolestousers", null, {});
     // Reset auto-increment
-    await queryInterface.sequelize.query("ALTER TABLE assignRolesToUser AUTO_INCREMENT = 1");
+    await queryInterface.sequelize.query("ALTER TABLE assignrolestousers AUTO_INCREMENT = 1");
     // Insert sample role assignments
-    return queryInterface.bulkInsert("assignRolesToUsers", [
+    return queryInterface.bulkInsert("assignrolestousers", [
       {
         userId: 1, // Assumes user with ID 1 exists
         userRoleId: 1, // Assumes role ID 1 exists (e.g., Admin)
@@ -30,7 +30,7 @@ module.exports = {
     ]);
   },
   down: async (queryInterface) => {
-    await queryInterface.bulkDelete("assignRolesToUsers", null, {
+    await queryInterface.bulkDelete("assignrolestousers", null, {
       truncate: true,
       cascade: true,
       restartIdentity: true,

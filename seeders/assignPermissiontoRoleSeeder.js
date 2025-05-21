@@ -1,11 +1,11 @@
 module.exports = {
   up: async (queryInterface) => {
     // Delete previous assignments
-    await queryInterface.bulkDelete("assignPermissiontoRole", null, {});
+    await queryInterface.bulkDelete("assignpermissiontoroles", null, {});
     // Reset auto-increment
-    await queryInterface.sequelize.query("ALTER TABLE assignPermissiontoRole AUTO_INCREMENT = 1");
+    await queryInterface.sequelize.query("ALTER TABLE assignpermissiontoroles AUTO_INCREMENT = 1");
     // Seed role-permission mappings
-    return queryInterface.bulkInsert("assignPermissiontoRoles", [
+    return queryInterface.bulkInsert("assignpermissiontoroles", [
       {
         userRoleId: 1, // Admin
         permissionId: 1, // CREATE_USER
@@ -44,7 +44,7 @@ module.exports = {
     ]);
   },
   down: async (queryInterface) => {
-    await queryInterface.bulkDelete("assignPermissiontoRoles", null, {
+    await queryInterface.bulkDelete("assignpermissiontoroles", null, {
       truncate: true,
       cascade: true,
       restartIdentity: true,
