@@ -26,11 +26,11 @@ dotenv.config();
 app.use(express.json());
 const basePath = "/api";
 app.use(basePath + '/ministries', ministryRoutes); 
-app.use( basePath + '/department', departmentRoute); 
-app.use( basePath + '/employee', employeeRoute)
+app.use(basePath + '/department', departmentRoute); 
+app.use(basePath + '/employee', employeeRoute)
 app.use(basePath + '/car' , carRoute)
 app.use(basePath + '/driver' ,driverRoute)
-app.use(basePath+ '/empCarAllocation', empCarAllocationRoutes)
+app.use(basePath + '/empCarAllocation', empCarAllocationRoutes)
 app.use(basePath + '/carDriverReservation', CarDriverReservationRoute)
 app.use(basePath + '/carEmployeeHistory', carEmployeeHistoryRoute)
 app.use(basePath + '/drivercarhistory', driverCarHistoryRoute);
@@ -38,7 +38,7 @@ app.use(basePath + '/user', userRoute)
 app.use(basePath + '/fuel', fuelRoute)
 app.use(basePath + '/budget' , budgetRoute)
 app.use(basePath + '/maintenance' , maintenanceRoute)
-app.use(basePath +  '/auth', authRoutes);
+app.use(basePath + '/auth', authRoutes);
 app.use(basePath + '/userRole', userRoleRoute)
 app.use(basePath + '/permission', permissionRoute)
 app.use(basePath + '/assignPermissionToRoles', assignPermissionToRoleRoute)
