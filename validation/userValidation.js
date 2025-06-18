@@ -14,7 +14,7 @@ const validateUserCreation = [
         .isLength({ min: 3 }).withMessage('Name must be at least 3 characters long'),
     body('userPassword')
         .notEmpty().withMessage('Password is required')
-        .isLength({ min: 3 }).withMessage('Password must be at least 6 characters long'),
+        .isLength({ min: 3 }).withMessage('Password must be at least 3 characters long'),
     handleValidationErrors,
 ];
 const validateUserUpdate = [
