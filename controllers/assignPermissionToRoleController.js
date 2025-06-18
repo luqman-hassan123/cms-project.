@@ -8,7 +8,7 @@ const createAssignPermissionToRole = async (req, res) => {
     res.status(201).json(newAssignment);
   } catch (error) {
     logError("Controller: Failed to create permission assignment", {
-      filePath: "controllers/assignPermissionToRoleController",
+      filePath: __filename,
       methodName: "createAssignPermissionToRole",
       error: error.message,
     });
@@ -21,7 +21,7 @@ const getAllAssignPermissionToRole = async (req, res) => {
     res.status(200).json(assignments);
   } catch (error) {
     logError("Controller: Failed to fetch permission assignments", {
-      filePath: "controllers/assignPermissionToRoleController",
+      filePath: __filename,
       methodName: "getAllAssignPermissionToRole",
       error: error.message,
     });
@@ -38,7 +38,7 @@ const getAssignPermissionToRoleById = async (req, res) => {
     res.status(200).json(assignment);
   } catch (error) {
     logError("Controller: Failed to fetch permission assignment by ID", {
-      filePath: "controllers/assignPermissionToRoleController",
+      filePath: __filename,
       methodName: "getAssignPermissionToRoleById",
       error: error.message,
     });
@@ -53,7 +53,7 @@ const updateAssignPermissionToRole = async (req, res) => {
     res.status(200).json(updated);
   } catch (error) {
     logError("Controller: Failed to update permission assignment", {
-      filePath: "controllers/assignPermissionToRoleController",
+      filePath: __filename,
       methodName: "updateAssignPermissionToRole",
       error: error.message,
     });
@@ -67,7 +67,7 @@ const deleteAssignPermissionToRole = async (req, res) => {
     res.status(200).json(result);
   } catch (error) {
     logError("Controller: Failed to delete permission assignment", {
-      filePath: "controllers/assignPermissionToRoleController",
+      filePath: __filename,
       methodName: "deleteAssignPermissionToRole",
       error: error.message,
     });
